@@ -720,7 +720,7 @@ const BrandsStatsSection = () => {
           {/* Stat 2 */}
           <div className="relative">
             <div className="absolute -left-4 top-0 bottom-0 w-1 bg-green-500/30"></div>
-            <p className="text-6xl md:text-7xl font-bold text-green-400 mb-2">2X</p>
+            <p className="text-6xl md:text-7xl font-bold text-violet-400 mb-2">2X</p>
             <p className="text-gray-400 text-sm">cart recovery.</p>
           </div>
 
@@ -838,7 +838,7 @@ const FeaturesSection = () => {
                       stroke="currentColor"
                       strokeWidth="1"
                       strokeDasharray="4 4"
-                      className="text-green-400/30"
+                      className="text-violet-400/30"
                     />
                   </svg>
                 </div>
@@ -990,7 +990,7 @@ const FeaturesSection = () => {
               {/* Item 1 */}
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-green-500/20 border border-green-500/50 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -1041,7 +1041,7 @@ const HowItWorksSection = () => {
             fontWeight: 600,
           }}
         >
-          <span className="text-green-400">How</span> It Works
+          <span className="text-violet-400">How</span> It Works
         </h2>
       </motion.div>
 
@@ -1058,7 +1058,7 @@ const HowItWorksSection = () => {
           <div className="relative z-10">
             <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">1</div>
             <h3 className="text-2xl text-white mb-3">
-              <span className="text-green-400">Connect</span> your stack
+              <span className="text-violet-400">Connect</span> your stack
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Lantern plugs into your CRM, MAP, and data tools
@@ -1089,7 +1089,7 @@ const HowItWorksSection = () => {
           <div className="relative z-10">
             <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">2</div>
             <h3 className="text-2xl text-white mb-3">
-              <span className="text-green-400">Deploy</span> your agents
+              <span className="text-violet-400">Deploy</span> your agents
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Choose the right agents based on your goals
@@ -1120,7 +1120,7 @@ const HowItWorksSection = () => {
           <div className="relative z-10">
             <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">3</div>
             <h3 className="text-2xl text-white mb-3">
-              Boost your <span className="text-green-400">sales</span>
+              Boost your <span className="text-violet-400">sales</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               While AI handles the execution, you focus on strategy
@@ -1162,7 +1162,7 @@ const LanternEngineSection = () => {
             fontWeight: 600,
           }}
         >
-          Lantern <span className="text-green-400">Engine</span>
+          Lantern <span className="text-violet-400">Engine</span>
         </h2>
         <p className="text-gray-400 text-lg max-w-xl leading-relaxed">
           From data collection to revenue generation, our three-layer architecture turns signals into sales
@@ -1223,7 +1223,7 @@ const LanternEngineSection = () => {
             {/* Footer Label */}
             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">1</div>
-              <span className="text-sm text-green-400 font-medium">Data layer</span>
+              <span className="text-sm text-violet-400 font-medium">Data layer</span>
             </div>
           </div>
 
@@ -1234,7 +1234,7 @@ const LanternEngineSection = () => {
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Center Square */}
                 <div className="w-32 h-32 bg-[#131320] border border-white/10 rounded-2xl flex items-center justify-center z-20 shadow-2xl relative">
-                  <span className="text-green-400 font-semibold text-sm tracking-widest">SYMBOLS</span>
+                  <span className="text-violet-400 font-semibold text-sm tracking-widest">SYMBOLS</span>
                   {/* Inner glow */}
                   <div className="absolute inset-0 bg-green-500/5 rounded-2xl"></div>
                 </div>
@@ -1268,7 +1268,7 @@ const LanternEngineSection = () => {
             {/* Footer Label */}
             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">2</div>
-              <span className="text-sm text-green-400 font-medium">Orchestration layer</span>
+              <span className="text-sm text-violet-400 font-medium">Orchestration layer</span>
             </div>
           </div>
 
@@ -1325,7 +1325,7 @@ const LanternEngineSection = () => {
             {/* Footer Label */}
             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">3</div>
-              <span className="text-sm text-green-400 font-medium">Agent layer</span>
+              <span className="text-sm text-violet-400 font-medium">Agent layer</span>
             </div>
           </div>
 
