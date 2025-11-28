@@ -7,7 +7,6 @@ import {
   FaHeartbeat,
   FaRunning,
   FaMobileAlt,
-  FaRobot,
 } from "react-icons/fa";
 
 export const Interface = () => {
