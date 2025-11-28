@@ -324,7 +324,7 @@ const HeroSection = () => {
             <span className="text-sm font-medium">EN</span>
           </div>
           <button className="bg-white text-black hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm transition-all">
-            Start for free
+            Join waitlist
           </button>
         </div>
       </motion.header>
@@ -837,22 +837,6 @@ const FeaturesSection = () => {
               </div>
 
               {/* Step 2 - Inventory Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.2s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-blue-900/30 border border-blue-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-blue-400 font-medium">
-                      Inventory Management Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
 
               {/* Step 3 - Customer Support Agent */}
               <div
@@ -925,7 +909,22 @@ const FeaturesSection = () => {
                   </div>
                 </div>
               </div>
-
+              <div
+                className="flex items-center gap-3 animate-slide-in"
+                style={{ animationDelay: "0.2s" }}
+              >
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                </div>
+                <div className="flex-1 bg-blue-900/30 border border-blue-500/30 rounded-lg px-4 py-2.5">
+                  <div className="text-sm text-gray-300">
+                    <span className="text-blue-400 font-medium">
+                      Upsell Management Agent
+                    </span>{" "}
+                    is created
+                  </div>
+                </div>
+              </div>
               {/* Step 7 - Payment Processing Agent */}
               <div
                 className="flex items-center gap-3 animate-slide-in"
