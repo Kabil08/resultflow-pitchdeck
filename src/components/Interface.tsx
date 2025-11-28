@@ -1293,353 +1293,353 @@ const HowItWorksSection = () => {
   );
 };
 
-const LanternEngineSection = () => {
-  return (
-    <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-center bg-[#0a0a16]">
-      {/* Section Header */}
-      <motion.div
-        className="mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <h2
-          className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight"
-          style={{
-            fontFamily: "Cormorant Garamond, Georgia, serif",
-            fontWeight: 600,
-          }}
-        >
-          Lantern <span className="text-violet-400">Engine</span>
-        </h2>
-        <p className="text-gray-400 text-lg max-w-xl leading-relaxed">
-          From data collection to revenue generation, our three-layer
-          architecture turns signals into sales
-        </p>
-      </motion.div>
-
-      {/* Engine Diagram Container */}
-      <motion.div
-        className="w-full bg-[#131320] border border-white/5 rounded-3xl p-8 md:p-12 relative"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
-          {/* Column 1: Data Layer */}
-          <div className="flex flex-col gap-6">
-            <div className="bg-[#1a1a2e] border border-white/5 rounded-2xl p-8 h-[400px] relative flex flex-col justify-center">
-              {/* Connecting Lines Container */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                {/* Lines from items to right edge */}
-                <path
-                  d="M180 100 L 1000 100"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                <path
-                  d="M220 170 L 1000 170"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                <path
-                  d="M180 240 L 1000 240"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                <path
-                  d="M220 310 L 1000 310"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-              </svg>
-
-              {/* Items */}
-              <div className="space-y-8 relative z-10">
-                {/* Customer Data - Left */}
-                <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 backdrop-blur-sm">
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    🔗
-                  </div>
-                  <span className="text-xs font-medium text-gray-300">
-                    Customer Data
-                  </span>
-                </div>
-
-                {/* Product Catalog - Indented */}
-                <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 ml-12 backdrop-blur-sm">
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    🔗
-                  </div>
-                  <span className="text-xs font-medium text-gray-300">
-                    Product Catalog
-                  </span>
-                </div>
-
-                {/* POS Systems - Left */}
-                <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 backdrop-blur-sm">
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    🔗
-                  </div>
-                  <span className="text-xs font-medium text-gray-300">
-                    POS Systems
-                  </span>
-                </div>
-
-                {/* Sales Signals - Indented */}
-                <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 ml-12 backdrop-blur-sm">
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    🔗
-                  </div>
-                  <span className="text-xs font-medium text-gray-300">
-                    Sales Signals
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer Label */}
-            <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
-              <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">
-                1
-              </div>
-              <span className="text-sm text-violet-400 font-medium">
-                Data layer
-              </span>
-            </div>
-          </div>
-
-          {/* Column 2: Orchestration Layer */}
-          <div className="flex flex-col gap-6">
-            <div className="bg-[#1a1a2e] border border-white/5 rounded-2xl p-8 h-[400px] relative flex items-center justify-center">
-              {/* Central Hub */}
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Center Square */}
-                <div className="w-32 h-32 bg-[#131320] border border-purple-500/30 rounded-2xl flex items-center justify-center z-20 shadow-2xl relative">
-                  <span className="text-violet-400 font-semibold text-sm tracking-widest">
-                    AGENT ORCH
-                  </span>
-                  {/* Inner glow */}
-                  <div className="absolute inset-0 bg-purple-500/10 rounded-2xl"></div>
-                </div>
-
-                {/* Surrounding Nodes */}
-                <div className="absolute top-12 w-32 h-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
-                  <span className="text-[10px] font-medium text-gray-300 tracking-wider">
-                    TRIGGERS
-                  </span>
-                </div>
-                <div className="absolute bottom-12 w-32 h-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
-                  <span className="text-[10px] font-medium text-gray-300 tracking-wider">
-                    ROUTING
-                  </span>
-                </div>
-                <div className="absolute left-8 h-32 w-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
-                  <span className="text-[10px] font-medium text-gray-300 -rotate-90 tracking-wider whitespace-nowrap">
-                    WORKFLOWS
-                  </span>
-                </div>
-                <div className="absolute right-8 h-32 w-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
-                  <span className="text-[10px] font-medium text-gray-300 rotate-90 tracking-wider whitespace-nowrap">
-                    DATA FLOW
-                  </span>
-                </div>
-
-                {/* Connecting Lines */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                  {/* Top connections */}
-                  <path
-                    d="M100 80 L 100 130"
-                    stroke="#a855f7"
-                    strokeOpacity="0.3"
-                    strokeDasharray="4 4"
-                  />
-                  <path
-                    d="M240 80 L 240 130"
-                    stroke="#a855f7"
-                    strokeOpacity="0.3"
-                    strokeDasharray="4 4"
-                  />
-                  {/* Bottom connections */}
-                  <path
-                    d="M100 270 L 100 320"
-                    stroke="#a855f7"
-                    strokeOpacity="0.3"
-                    strokeDasharray="4 4"
-                  />
-                  <path
-                    d="M240 270 L 240 320"
-                    stroke="#a855f7"
-                    strokeOpacity="0.3"
-                    strokeDasharray="4 4"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            {/* Footer Label */}
-            <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
-              <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">
-                2
-              </div>
-              <span className="text-sm text-violet-400 font-medium">
-                Orchestration layer
-              </span>
-            </div>
-          </div>
-
-          {/* Column 3: Agent Layer */}
-          <div className="flex flex-col gap-6">
-            <div className="bg-[#1a1a2e] border border-white/5 rounded-2xl p-8 h-[400px] relative flex flex-col justify-center">
-              {/* Connecting Lines Container */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                {/* Incoming lines from left */}
-                <path
-                  d="M0 100 L 120 100"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                <path
-                  d="M0 170 L 120 170"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                <path
-                  d="M0 240 L 120 240"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                <path
-                  d="M0 310 L 120 310"
-                  stroke="#a855f7"
-                  strokeOpacity="0.5"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-
-                {/* Feedback Loops (Right side) */}
-                {/* Cart Recovery -> Checkout */}
-                <path
-                  d="M260 100 C 300 100, 300 170, 260 170"
-                  stroke="#a855f7"
-                  strokeOpacity="0.3"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                {/* Checkout -> Retention */}
-                <path
-                  d="M260 170 C 320 170, 320 240, 260 240"
-                  stroke="#a855f7"
-                  strokeOpacity="0.3"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                {/* Retention -> Pricing */}
-                <path
-                  d="M260 240 C 300 240, 300 310, 260 310"
-                  stroke="#a855f7"
-                  strokeOpacity="0.3"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-                {/* Pricing -> Cart Recovery (Long loop) */}
-                <path
-                  d="M260 310 C 340 310, 340 100, 260 100"
-                  stroke="#a855f7"
-                  strokeOpacity="0.3"
-                  strokeWidth="1"
-                  strokeDasharray="4 4"
-                  fill="none"
-                />
-              </svg>
-
-              {/* Items */}
-              <div className="space-y-8 relative z-10 flex flex-col items-end pr-8">
-                {/* CART RECOVERY */}
-                <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
-                  <span className="text-xs font-medium text-gray-300 pl-2">
-                    CART RECOVERY
-                  </span>
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    🛒
-                  </div>
-                </div>
-
-                {/* CHECKOUT */}
-                <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
-                  <span className="text-xs font-medium text-gray-300 pl-2">
-                    CHECKOUT
-                  </span>
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    💳
-                  </div>
-                </div>
-
-                {/* RETENTION */}
-                <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
-                  <span className="text-xs font-medium text-gray-300 pl-2">
-                    RETENTION
-                  </span>
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    👤+
-                  </div>
-                </div>
-
-                {/* PRICING */}
-                <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
-                  <span className="text-xs font-medium text-gray-300 pl-2">
-                    PRICING
-                  </span>
-                  <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
-                    💰
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Footer Label */}
-            <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
-              <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">
-                3
-              </div>
-              <span className="text-sm text-violet-400 font-medium">
-                Agent layer
-              </span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
+// const LanternEngineSection = () => {
+//   return (
+//     <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-center bg-[#0a0a16]">
+//       {/* Section Header */}
+//       <motion.div
+//         className="mb-16"
+//         initial={{ opacity: 0, y: 30 }}
+//         whileInView={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.8 }}
+//         viewport={{ once: true }}
+//       >
+//         <h2
+//           className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight"
+//           style={{
+//             fontFamily: "Cormorant Garamond, Georgia, serif",
+//             fontWeight: 600,
+//           }}
+//         >
+//           Lantern <span className="text-violet-400">Engine</span>
+//         </h2>
+//         <p className="text-gray-400 text-lg max-w-xl leading-relaxed">
+//           From data collection to revenue generation, our three-layer
+//           architecture turns signals into sales
+//         </p>
+//       </motion.div>
+//
+//       {/* Engine Diagram Container */}
+//       <motion.div
+//         className="w-full bg-[#131320] border border-white/5 rounded-3xl p-8 md:p-12 relative"
+//         initial={{ opacity: 0, y: 30 }}
+//         whileInView={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.8, delay: 0.2 }}
+//         viewport={{ once: true }}
+//       >
+//         {/* Main Grid */}
+//         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+//           {/* Column 1: Data Layer */}
+//           <div className="flex flex-col gap-6">
+//             <div className="bg-[#1a1a2e] border border-white/5 rounded-2xl p-8 h-[400px] relative flex flex-col justify-center">
+//               {/* Connecting Lines Container */}
+//               <svg className="absolute inset-0 w-full h-full pointer-events-none">
+//                 {/* Lines from items to right edge */}
+//                 <path
+//                   d="M180 100 L 1000 100"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 <path
+//                   d="M220 170 L 1000 170"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 <path
+//                   d="M180 240 L 1000 240"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 <path
+//                   d="M220 310 L 1000 310"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//               </svg>
+//
+//               {/* Items */}
+//               <div className="space-y-8 relative z-10">
+//                 {/* Customer Data - Left */}
+//                 <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 backdrop-blur-sm">
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     🔗
+//                   </div>
+//                   <span className="text-xs font-medium text-gray-300">
+//                     Customer Data
+//                   </span>
+//                 </div>
+//
+//                 {/* Product Catalog - Indented */}
+//                 <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 ml-12 backdrop-blur-sm">
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     🔗
+//                   </div>
+//                   <span className="text-xs font-medium text-gray-300">
+//                     Product Catalog
+//                   </span>
+//                 </div>
+//
+//                 {/* POS Systems - Left */}
+//                 <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 backdrop-blur-sm">
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     🔗
+//                   </div>
+//                   <span className="text-xs font-medium text-gray-300">
+//                     POS Systems
+//                   </span>
+//                 </div>
+//
+//                 {/* Sales Signals - Indented */}
+//                 <div className="flex items-center gap-3 bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-36 ml-12 backdrop-blur-sm">
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     🔗
+//                   </div>
+//                   <span className="text-xs font-medium text-gray-300">
+//                     Sales Signals
+//                   </span>
+//                 </div>
+//               </div>
+//             </div>
+//
+//             {/* Footer Label */}
+//             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
+//               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">
+//                 1
+//               </div>
+//               <span className="text-sm text-violet-400 font-medium">
+//                 Data layer
+//               </span>
+//             </div>
+//           </div>
+//
+//           {/* Column 2: Orchestration Layer */}
+//           <div className="flex flex-col gap-6">
+//             <div className="bg-[#1a1a2e] border border-white/5 rounded-2xl p-8 h-[400px] relative flex items-center justify-center">
+//               {/* Central Hub */}
+//               <div className="relative w-full h-full flex items-center justify-center">
+//                 {/* Center Square */}
+//                 <div className="w-32 h-32 bg-[#131320] border border-purple-500/30 rounded-2xl flex items-center justify-center z-20 shadow-2xl relative">
+//                   <span className="text-violet-400 font-semibold text-sm tracking-widest">
+//                     AGENT ORCH
+//                   </span>
+//                   {/* Inner glow */}
+//                   <div className="absolute inset-0 bg-purple-500/10 rounded-2xl"></div>
+//                 </div>
+//
+//                 {/* Surrounding Nodes */}
+//                 <div className="absolute top-12 w-32 h-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
+//                   <span className="text-[10px] font-medium text-gray-300 tracking-wider">
+//                     TRIGGERS
+//                   </span>
+//                 </div>
+//                 <div className="absolute bottom-12 w-32 h-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
+//                   <span className="text-[10px] font-medium text-gray-300 tracking-wider">
+//                     ROUTING
+//                   </span>
+//                 </div>
+//                 <div className="absolute left-8 h-32 w-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
+//                   <span className="text-[10px] font-medium text-gray-300 -rotate-90 tracking-wider whitespace-nowrap">
+//                     WORKFLOWS
+//                   </span>
+//                 </div>
+//                 <div className="absolute right-8 h-32 w-12 bg-purple-900/20 border border-purple-500/30 rounded-xl flex items-center justify-center z-10">
+//                   <span className="text-[10px] font-medium text-gray-300 rotate-90 tracking-wider whitespace-nowrap">
+//                     DATA FLOW
+//                   </span>
+//                 </div>
+//
+//                 {/* Connecting Lines */}
+//                 <svg className="absolute inset-0 w-full h-full pointer-events-none">
+//                   {/* Top connections */}
+//                   <path
+//                     d="M100 80 L 100 130"
+//                     stroke="#a855f7"
+//                     strokeOpacity="0.3"
+//                     strokeDasharray="4 4"
+//                   />
+//                   <path
+//                     d="M240 80 L 240 130"
+//                     stroke="#a855f7"
+//                     strokeOpacity="0.3"
+//                     strokeDasharray="4 4"
+//                   />
+//                   {/* Bottom connections */}
+//                   <path
+//                     d="M100 270 L 100 320"
+//                     stroke="#a855f7"
+//                     strokeOpacity="0.3"
+//                     strokeDasharray="4 4"
+//                   />
+//                   <path
+//                     d="M240 270 L 240 320"
+//                     stroke="#a855f7"
+//                     strokeOpacity="0.3"
+//                     strokeDasharray="4 4"
+//                   />
+//                 </svg>
+//               </div>
+//             </div>
+//
+//             {/* Footer Label */}
+//             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
+//               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">
+//                 2
+//               </div>
+//               <span className="text-sm text-violet-400 font-medium">
+//                 Orchestration layer
+//               </span>
+//             </div>
+//           </div>
+//
+//           {/* Column 3: Agent Layer */}
+//           <div className="flex flex-col gap-6">
+//             <div className="bg-[#1a1a2e] border border-white/5 rounded-2xl p-8 h-[400px] relative flex flex-col justify-center">
+//               {/* Connecting Lines Container */}
+//               <svg className="absolute inset-0 w-full h-full pointer-events-none">
+//                 {/* Incoming lines from left */}
+//                 <path
+//                   d="M0 100 L 120 100"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 <path
+//                   d="M0 170 L 120 170"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 <path
+//                   d="M0 240 L 120 240"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 <path
+//                   d="M0 310 L 120 310"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.5"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//
+//                 {/* Feedback Loops (Right side) */}
+//                 {/* Cart Recovery -> Checkout */}
+//                 <path
+//                   d="M260 100 C 300 100, 300 170, 260 170"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.3"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 {/* Checkout -> Retention */}
+//                 <path
+//                   d="M260 170 C 320 170, 320 240, 260 240"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.3"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 {/* Retention -> Pricing */}
+//                 <path
+//                   d="M260 240 C 300 240, 300 310, 260 310"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.3"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//                 {/* Pricing -> Cart Recovery (Long loop) */}
+//                 <path
+//                   d="M260 310 C 340 310, 340 100, 260 100"
+//                   stroke="#a855f7"
+//                   strokeOpacity="0.3"
+//                   strokeWidth="1"
+//                   strokeDasharray="4 4"
+//                   fill="none"
+//                 />
+//               </svg>
+//
+//               {/* Items */}
+//               <div className="space-y-8 relative z-10 flex flex-col items-end pr-8">
+//                 {/* CART RECOVERY */}
+//                 <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
+//                   <span className="text-xs font-medium text-gray-300 pl-2">
+//                     CART RECOVERY
+//                   </span>
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     🛒
+//                   </div>
+//                 </div>
+//
+//                 {/* CHECKOUT */}
+//                 <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
+//                   <span className="text-xs font-medium text-gray-300 pl-2">
+//                     CHECKOUT
+//                   </span>
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     💳
+//                   </div>
+//                 </div>
+//
+//                 {/* RETENTION */}
+//                 <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
+//                   <span className="text-xs font-medium text-gray-300 pl-2">
+//                     RETENTION
+//                   </span>
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     👤+
+//                   </div>
+//                 </div>
+//
+//                 {/* PRICING */}
+//                 <div className="flex items-center justify-between bg-purple-900/20 border border-purple-500/30 p-3 rounded-lg w-40 backdrop-blur-sm">
+//                   <span className="text-xs font-medium text-gray-300 pl-2">
+//                     PRICING
+//                   </span>
+//                   <div className="w-6 h-6 rounded bg-purple-500/20 flex items-center justify-center text-[10px]">
+//                     💰
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//
+//             {/* Footer Label */}
+//             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
+//               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">
+//                 3
+//               </div>
+//               <span className="text-sm text-violet-400 font-medium">
+//                 Agent layer
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.div>
+//     </div>
+//   );
+// };
 
 const GetStartedSection = () => {
   return (
