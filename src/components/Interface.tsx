@@ -1,34 +1,35 @@
 import { motion } from "framer-motion";
+import {
+  FaVideo,
+  FaLeaf,
+  FaHome,
+  FaTshirt,
+  FaHeartbeat,
+  FaRunning,
+  FaMobileAlt,
+  FaRobot,
+} from "react-icons/fa";
 
 export const Interface = () => {
   return (
     <div className="flex flex-col items-center w-full">
       {/* Hero stays on first screen */}
       <HeroSection />
-      
-      {/* Content sections with background */}
-      <div className="w-full bg-gradient-to-b from-[#0a0a16] via-[#0f0f1e] to-[#0a0a16]">
-        <BrandsStatsSection />
-        <HowItWorksSection />
-        <FeaturesSection />
-        <LanternEngineSection />
-      </div>
+
+      <ChosenBySection />
+
+      <AboutUsSection />
+      <BrandsStatsSection />
+      <HowItWorksSection />
+      <FeaturesSection />
+      <LanternEngineSection />
     </div>
   );
 };
 
 const HeroSection = () => {
   return (
-    <div className="h-screen w-screen relative overflow-hidden bg-[#0a0a16]">
-      {/* Background Gradient - Deep purple to lighter purple at the ring */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 120%, #4c1d95 0%, #1e1b4b 40%, #020617 80%)",
-        }}
-      ></div>
-
+    <div className="h-screen w-screen relative bg-[#0a0a16]">
       {/* Grid Pattern */}
       <div
         className="absolute inset-0 opacity-25"
@@ -181,20 +182,19 @@ const HeroSection = () => {
       {/* Large Semi-Ring with Glowing Lights */}
       <div
         className="absolute bottom-0 left-0 right-0 w-full"
-        style={{ height: "22vh", zIndex: 1 }}
+        style={{ height: "22vh", zIndex: 1, overflow: "visible" }}
       >
         {/* Atmospheric Blend Overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-[#0a0a16] via-[#1e1b4b]/50 to-transparent pointer-events-none"></div>
 
         {/* The Glow behind the ring */}
-        <div className="absolute bottom-[-50px] left-1/2 -translate-x-1/2 w-[100vw] h-[35vh] bg-purple-600/30 blur-[100px] rounded-full pointer-events-none"></div>
-
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full" style={{ overflow: "visible" }}>
           {/* Main Ring Arc */}
           <svg
-            className="absolute bottom-0 left-0 w-full h-full"
+            className="absolute bottom-0 left-0 w-full"
             viewBox="0 0 1000 300"
             preserveAspectRatio="none"
+            style={{ height: "100%", overflow: "visible" }}
           >
             <defs>
               <linearGradient id="ringFill" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -210,53 +210,64 @@ const HeroSection = () => {
                 y2="0%"
               >
                 <stop offset="0%" stopColor="rgba(139, 92, 246, 0)" />
-                <stop offset="10%" stopColor="rgba(139, 92, 246, 0.4)" />
-                <stop offset="30%" stopColor="rgba(168, 85, 247, 1)" />
-                <stop offset="70%" stopColor="rgba(168, 85, 247, 1)" />
-                <stop offset="90%" stopColor="rgba(139, 92, 246, 0.4)" />
+                <stop offset="10%" stopColor="rgba(139, 92, 246, 0.25)" />
+                <stop offset="30%" stopColor="rgba(168, 85, 247, 0.6)" />
+                <stop offset="70%" stopColor="rgba(168, 85, 247, 0.6)" />
+                <stop offset="90%" stopColor="rgba(139, 92, 246, 0.25)" />
                 <stop offset="100%" stopColor="rgba(139, 92, 246, 0)" />
               </linearGradient>
-              <linearGradient
-                id="glowToBlack"
-                x1="0%"
-                y1="0%"
-                x2="0%"
-                y2="100%"
-              >
-                <stop offset="0%" stopColor="rgba(168, 85, 247, 0.6)" />
-                <stop offset="80%" stopColor="#000000" />
-                <stop offset="100%" stopColor="#000000" />
-              </linearGradient>
               <filter
-                id="glow-blur"
+                id="ring-blur"
                 x="-50%"
                 y="-50%"
                 width="200%"
                 height="200%"
               >
-                <feGaussianBlur stdDeviation="15" result="blur" />
+                <feGaussianBlur stdDeviation="3" result="blur" />
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
+              <linearGradient id="upwardGlow" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="rgba(168, 85, 247, 0.15)" />
+                <stop offset="20%" stopColor="rgba(168, 85, 247, 0.08)" />
+                <stop offset="40%" stopColor="rgba(139, 92, 246, 0.04)" />
+                <stop offset="100%" stopColor="rgba(139, 92, 246, 0)" />
+              </linearGradient>
+              <filter
+                id="upward-glow-blur"
+                x="-50%"
+                y="-400%"
+                width="200%"
+                height="600%"
+              >
+                <feGaussianBlur stdDeviation="100" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+              <clipPath id="ringClip">
+                <path d="M 0,0 Q 500,300 1000,0 L 1000,-400 L 0,-400 Z" />
+              </clipPath>
             </defs>
 
-            {/* Glow Effect - Thick blurred stroke along the curve, shifted down */}
-            <path
-              d="M 0,0 Q 500,300 1000,0"
-              stroke="url(#ringGradient)"
-              strokeWidth="60"
-              fill="none"
-              className="opacity-60"
-              filter="url(#glow-blur)"
-              transform="translate(0, 30)"
-            />
+            {/* Upward Glow Effect - Light, blurred, glass-like, clipped to ring */}
+            <g clipPath="url(#ringClip)">
+              <path
+                d="M 0,0 Q 500,300 1000,0"
+                stroke="url(#upwardGlow)"
+                strokeWidth="300"
+                fill="none"
+                className="opacity-60"
+                filter="url(#upward-glow-blur)"
+                transform="translate(0, -150)"
+              />
+            </g>
 
             {/* The solid curve - Flipped to be a "U" shape / Valley, spanning full width */}
             <path
               d="M 0,0 Q 500,300 1000,0"
               stroke="url(#ringGradient)"
-              strokeWidth="4"
+              strokeWidth="42"
               fill="none"
-              className="opacity-100"
+              className="opacity-70"
+              filter="url(#ring-blur)"
             />
           </svg>
         </div>
@@ -271,33 +282,14 @@ const HeroSection = () => {
       >
         <div className="flex items-center gap-2">
           {/* Logo Icon */}
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z"
-              fill="white"
-              fillOpacity="0.1"
-            />
-            <path
-              d="M21.3333 10.6667C21.3333 10.6667 18.6667 10.6667 18.6667 14.6667C18.6667 18.6667 16 18.6667 16 18.6667C16 18.6667 13.3333 18.6667 13.3333 14.6667C13.3333 10.6667 10.6667 10.6667 10.6667 10.6667"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-            <path
-              d="M10.6667 21.3333C10.6667 21.3333 13.3333 21.3333 13.3333 17.3333C13.3333 13.3333 16 13.3333 16 13.3333C16 13.3333 18.6667 13.3333 18.6667 17.3333C18.6667 21.3333 21.3333 21.3333 21.3333 21.3333"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
+          <img
+            src="/Gemini_Generated_Image_gmuivpgmuivpgmui-removebg-preview.png"
+            alt="Result Flow Logo"
+            className="w-8 h-8 object-contain"
+            style={{ filter: "invert(1)" }}
+          />
           <span className="text-white text-xl font-semibold tracking-tight">
-            Aivora
+            Result Flow
           </span>
         </div>
 
@@ -340,6 +332,18 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-8 md:px-16 max-w-screen-2xl mx-auto pt-20">
+        {/* Badge */}
+        <motion.div
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <span className="text-white text-sm font-medium">
+            Vertical Agentic AI for Retail
+          </span>
+        </motion.div>
+
         {/* Headline */}
         <motion.h1
           className="text-5xl md:text-7xl lg:text-8xl text-center text-white mb-8 leading-[1.1] tracking-tight"
@@ -351,9 +355,9 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          Empowering Websites with
+          The retail-native
           <br />
-          <span className="text-gray-400">Intelligent AI Agents</span>
+          <span className="text-gray-400">Agentic Commerce platform</span>
         </motion.h1>
 
         {/* Description */}
@@ -363,8 +367,9 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9 }}
         >
-          Deliver smarter interactions, instant assistance, and personalized
-          experiences that transform every visitor into a lasting connection
+          Instant visibility into every customer interaction, conversion
+          opportunity, and revenue driver—without ever leaving your e-commerce
+          platform.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -381,6 +386,246 @@ const HeroSection = () => {
             View More
           </button>
         </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const ChosenBySection = () => {
+  const companies = [
+    {
+      name: "Telehealth",
+      logo: <FaVideo className="text-white opacity-95" size={32} />,
+    },
+    {
+      name: "Skincare",
+      logo: <FaLeaf className="text-white opacity-95" size={32} />,
+    },
+    {
+      name: "Home Décor",
+      logo: <FaHome className="text-white opacity-95" size={32} />,
+    },
+    {
+      name: "Fashion",
+      logo: <FaTshirt className="text-white opacity-95" size={32} />,
+    },
+    {
+      name: "Healthcare Diagnostics",
+      logo: <FaHeartbeat className="text-white opacity-95" size={32} />,
+    },
+    {
+      name: "Performance Apparel",
+      logo: <FaRunning className="text-white opacity-95" size={32} />,
+    },
+    {
+      name: "Global Consumer Electronics",
+      logo: <FaMobileAlt className="text-white opacity-95" size={32} />,
+    },
+  ];
+
+  return (
+    <div
+      className="w-full py-2 pb-20 px-8 md:px-16 relative overflow-hidden bg-[#0a0a16]"
+      // style={{
+      //   background:
+      //     "linear-gradient(to bottom, #0a0a16 0%, #1a1a3e 30%, #0a0a16 100%)",
+      // }}
+    >
+      {/* Gradient overlay at top to blend with hero section */}
+      {/* <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] h-[30vh] bg-purple-600/40 blur-[120px] rounded-full pointer-events-none"
+        style={{ zIndex: 0, transform: "translate(-50%, -50%)" }}
+      ></div> */}
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Heading */}
+        <motion.h2
+          className="text-xl md:text-xl lg:text-2xl text-center text-white mb-12 md:mb-16 font-medium tracking-wider"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Trusted by leading global retail, healthcare, lifestyle, and
+          electronics brands
+        </motion.h2>
+
+        {/* Company Logos - Marquee */}
+        <div className="relative w-full overflow-hidden">
+          {/* Blur gradients on left and right */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a16] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a16] to-transparent z-10 pointer-events-none"></div>
+
+          <div className="flex items-center gap-12 md:gap-16 lg:gap-20 animate-marquee">
+            {/* First set */}
+            {companies.map((company, index) => (
+              <div
+                key={`first-${index}`}
+                className="flex items-center gap-3 flex-shrink-0"
+              >
+                <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+                  {company.logo}
+                </div>
+                <span className="text-white text-sm md:text-base font-medium opacity-90 whitespace-nowrap">
+                  {company.name}
+                </span>
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {companies.map((company, index) => (
+              <div
+                key={`second-${index}`}
+                className="flex items-center gap-3 flex-shrink-0"
+              >
+                <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12">
+                  {company.logo}
+                </div>
+                <span className="text-white text-sm md:text-base font-medium opacity-90 whitespace-nowrap">
+                  {company.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <style>{`
+          @keyframes marquee {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .animate-marquee {
+            animation: marquee 30s linear infinite;
+          }
+        `}</style>
+      </div>
+    </div>
+  );
+};
+
+const AboutUsSection = () => {
+  const teamMembers = [
+    {
+      id: 1,
+      name: "Kal Raman",
+      role: "Founder & CEO",
+      bio: "Amazon S-Team, Samsung CDO, Groupon COO, multiple exits.",
+      image: "/team/kal.png",
+    },
+    {
+      id: 2,
+      name: "Rick Dalzell",
+      role: "Advisor",
+      bio: "Former Senior Vice President at Amazon, instrumental in building Amazon's technology and operations platform.",
+      image: "/team/rick.png",
+    },
+    {
+      id: 3,
+      name: "Peter Neupert",
+      role: "Advisor",
+      bio: "The former Corporate Vice President of Microsoft currently chairs or advises companies like Fortrea, LabCorp, and Adaptive Biotechnologies",
+      image: "/team/peter.png",
+    },
+    {
+      id: 4,
+      name: "Jason Child",
+      role: "Advisor",
+      bio: "Executive Vice President and Chief Financial Officer of Arm, known for scaling high‑growth tech companies and leading major finance and IPO efforts at firms like Amazon, Groupon, Splunk, and Opendoor",
+      image: "/team/jason.png",
+    },
+    {
+      id: 5,
+      name: "William Kim",
+      role: "Advisor",
+      bio: "CEO of Shinsegae International, noted executive with major roles in consumer retail and brand management.",
+      image: "/team/kim.png",
+    },
+  ];
+
+  return (
+    <div className="w-full py-20 md:py-32 px-8 md:px-16 relative overflow-hidden bg-[#0a0a16]">
+      {/* SVG Definitions for Alternating Chamfered Rectangle ClipPaths with Rounded Corners */}
+      <svg width="0" height="0" className="absolute">
+        <defs>
+          {/* Chamfered Left (Top-Left & Bottom-Right cut) */}
+          <clipPath id="roundedHexagonLeft" clipPathUnits="objectBoundingBox">
+            <path d="M 0 0.3 Q 0 0.28 0.02 0.26 L 0.26 0.02 Q 0.28 0 0.3 0 L 0.92 0 Q 1 0 1 0.08 L 1 0.7 Q 1 0.72 0.98 0.74 L 0.74 0.98 Q 0.72 1 0.7 1 L 0.08 1 Q 0 1 0 0.92 Z" />
+          </clipPath>
+          {/* Chamfered Right (Top-Right & Bottom-Left cut) */}
+          <clipPath id="roundedHexagonRight" clipPathUnits="objectBoundingBox">
+            <path d="M 0 0.08 Q 0 0 0.08 0 L 0.7 0 Q 0.72 0 0.74 0.02 L 0.98 0.26 Q 1 0.28 1 0.3 L 1 0.92 Q 1 1 0.92 1 L 0.3 1 Q 0.28 1 0.26 0.98 L 0.02 0.74 Q 0 0.72 0 0.7 Z" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Heading */}
+        <motion.h2
+          className="text-3xl md:text-4xl lg:text-5xl text-center text-white mb-4 font-semibold tracking-tight pb-24"
+          style={{
+            fontFamily: "Cormorant Garamond, Georgia, serif",
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          Backed by <span className="text-purple-500">Amazon S Team</span> Leaders
+        </motion.h2>
+
+
+        {/* Team Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
+          {teamMembers.map((member, index) => (
+            <motion.div
+              key={member.id}
+              className="flex flex-col items-center group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              {/* Image Container - Alternating Rounded Hexagonal Frame */}
+              <div
+                className="relative w-[240px] h-[240px] mx-auto mb-6 overflow-hidden bg-white"
+                style={{
+                  clipPath:
+                    index % 2 === 0
+                      ? "url(#roundedHexagonLeft)"
+                      : "url(#roundedHexagonRight)",
+                }}
+              >
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-in-out"
+                  onError={(e) => {
+                    // Fallback if image doesn't load
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+              </div>
+
+              {/* Name */}
+              <h3 className="text-xl md:text-2xl text-white font-bold mb-1 text-center">
+                {member.name}
+              </h3>
+
+              {/* Role */}
+              <p className="text-sm md:text-base text-purple-400 font-medium text-center mb-3">
+                {member.role}
+              </p>
+
+              {/* Bio */}
+              <p className="text-xs md:text-sm text-gray-400 text-center leading-relaxed px-2 max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                {member.bio}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -561,7 +806,7 @@ const FeaturesSection = () => {
                 <div className="w-16 h-16 bg-green-500/20 border-2 border-green-500/50 rounded-full flex items-center justify-center relative overflow-visible">
                   {/* Center circle */}
                   <div className="w-6 h-6 bg-green-400 rounded-full absolute"></div>
-                  
+
                   {/* Orbiting elements */}
                   {[0, 1, 2, 3].map((i) => {
                     const angle = (i * 90);
@@ -582,7 +827,7 @@ const FeaturesSection = () => {
                       ></div>
                     );
                   })}
-                  
+
                   {/* Rotating outer ring */}
                   <svg className="absolute w-16 h-16 animate-spin" style={{ animationDuration: '8s' }}>
                     <circle
@@ -597,7 +842,7 @@ const FeaturesSection = () => {
                     />
                   </svg>
                 </div>
-                
+
                 {/* Animation keyframes */}
                 <style>{`
                   @keyframes orbit {
@@ -753,7 +998,7 @@ const FeaturesSection = () => {
                   <div className="h-2 bg-gray-700 rounded-full w-3/4"></div>
                 </div>
               </div>
-              
+
               {/* Item 2 */}
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-purple-500/10 border border-purple-500/30 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -765,7 +1010,7 @@ const FeaturesSection = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Connecting Line */}
             <div className="absolute left-[calc(2rem+1.25rem)] top-12 bottom-12 w-0.5 bg-gray-800 -translate-x-1/2 z-0"></div>
           </div>
@@ -819,9 +1064,9 @@ const HowItWorksSection = () => {
               Lantern plugs into your CRM, MAP, and data tools
             </p>
           </div>
-          
+
           {/* Visual - Funnel/Connection */}
-          <div 
+          <div
             className="mt-auto relative h-64 w-full"
             style={{
               backgroundImage: 'url(https://res.cloudinary.com/dbtapyfau/image/upload/v1764346679/Screenshot_2025-11-28_at_9.47.36_PM_kkrfym.png)',
@@ -852,7 +1097,7 @@ const HowItWorksSection = () => {
           </div>
 
           {/* Visual - Rocket */}
-          <div 
+          <div
             className="mt-auto relative h-64 w-full"
             style={{
               backgroundImage: 'url(https://res.cloudinary.com/dbtapyfau/image/upload/v1764346679/Screenshot_2025-11-28_at_9.47.16_PM_gdoh08.png)',
@@ -883,7 +1128,7 @@ const HowItWorksSection = () => {
           </div>
 
           {/* Visual - Dashboard */}
-          <div 
+          <div
             className="mt-auto relative h-64 w-full"
             style={{
               backgroundImage: 'url(https://res.cloudinary.com/dbtapyfau/image/upload/v1764346679/Screenshot_2025-11-28_at_9.47.28_PM_evyact.png)',
@@ -934,7 +1179,7 @@ const LanternEngineSection = () => {
       >
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
-          
+
           {/* Column 1: Data Layer */}
           <div className="flex flex-col gap-6">
             <div className="bg-[#1a1a2e] border border-white/5 rounded-2xl p-8 h-[400px] relative flex flex-col justify-center">
@@ -974,7 +1219,7 @@ const LanternEngineSection = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Footer Label */}
             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">1</div>
@@ -993,7 +1238,7 @@ const LanternEngineSection = () => {
                   {/* Inner glow */}
                   <div className="absolute inset-0 bg-green-500/5 rounded-2xl"></div>
                 </div>
-                
+
                 {/* Surrounding Nodes */}
                 <div className="absolute top-12 w-32 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center z-10">
                   <span className="text-[10px] font-medium text-gray-300 tracking-wider">SIGNAL</span>
@@ -1019,7 +1264,7 @@ const LanternEngineSection = () => {
                 </svg>
               </div>
             </div>
-            
+
             {/* Footer Label */}
             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">2</div>
@@ -1076,7 +1321,7 @@ const LanternEngineSection = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Footer Label */}
             <div className="px-6 py-3 bg-[#1a1a2e] border border-white/5 rounded-full flex items-center gap-3 w-full justify-center">
               <div className="w-6 h-6 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-400">3</div>
