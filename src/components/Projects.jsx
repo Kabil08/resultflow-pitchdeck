@@ -34,3 +34,4 @@ export const projects = [
 ];
 
 export const currentProjectAtom = atom(0);
+

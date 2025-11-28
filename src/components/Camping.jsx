@@ -5,3 +5,4 @@ export const Camping = (props) => {
     const { scene } = useGLTF("/models/Camping.glb");
     return <primitive object={scene} {...props} />;
 };
+
