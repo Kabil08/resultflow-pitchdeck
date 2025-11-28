@@ -326,7 +326,7 @@ const HeroSection = () => {
             />
           </svg>
           <span className="text-white text-xl font-semibold tracking-tight">
-            Aivora
+            Result Flow
           </span>
         </div>
 
