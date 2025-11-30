@@ -9,6 +9,17 @@ import {
   FaMobileAlt,
 } from "react-icons/fa";
 
+// Tally popup helper function
+const openTallyWaitlist = () => {
+  if (typeof window !== 'undefined' && (window as any).Tally) {
+    (window as any).Tally.openPopup('q45oyO', {
+      layout: 'modal',
+      width: 600,
+      autoClose: 3000,
+    });
+  }
+};
+
 export const Interface = () => {
   return (
     <div className="flex flex-col items-center w-full">
@@ -19,7 +30,6 @@ export const Interface = () => {
       <HowItWorksSection />
       <FeaturesSection />
       <AboutUsSection />
-      <GetStartedSection />
       <Footer />
       {/* <LanternEngineSection /> */}
     </div>
@@ -323,7 +333,7 @@ const HeroSection = () => {
             </svg>
             <span className="text-sm font-medium">EN</span>
           </div>
-          <button className="bg-white text-black hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm transition-all">
+          <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm transition-all cursor-pointer">
             Join waitlist
           </button>
         </div>
@@ -358,9 +368,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          The retail-native
-          <br />
-          <span className="text-gray-400">Agentic Commerce platform</span>
+          Agentic AI DTC Platform
         </motion.h1>
 
         {/* Description */}
@@ -370,9 +378,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9 }}
         >
-          Instant visibility into every customer interaction, conversion
-          opportunity, and revenue driver—without ever leaving your e-commerce
-          platform.
+          Grow your revenue by greater than or equal to 100%, Cloud agnostic, best fit LLM, domain aware, enterprise aware
         </motion.p>
 
         {/* CTA Buttons */}
@@ -382,8 +388,8 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
         >
-          <button className="bg-white text-black hover:bg-gray-100 py-3 px-8 rounded-full font-semibold text-lg transition-all min-w-[160px]">
-            Get Started
+          <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 py-3 px-8 rounded-full font-semibold text-lg transition-all min-w-[160px] cursor-pointer">
+            Join Waitlist
           </button>
           <button className="bg-white/5 hover:bg-white/10 text-white py-3 px-8 rounded-full font-semibold text-lg transition-all border border-white/10 min-w-[160px]">
             View More
@@ -499,7 +505,7 @@ const ChosenBySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white font-semibold rounded-full transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105">
+          <button onClick={openTallyWaitlist} className="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white font-semibold rounded-full transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 cursor-pointer">
             Join Waitlist
           </button>
         </motion.div>
@@ -533,27 +539,34 @@ const AboutUsSection = () => {
     },
     {
       id: 2,
+      name: "Muru Subramani",
+      role: "CTO & CO-FOUNDER",
+      bio: "Former CTO at GlobalScholar, Microsoft Research scientist with 8+ patents in Machine Learning, built Valve's game distribution platform.",
+      image: "/team/muru.png",
+    },
+    {
+      id: 3,
       name: "Rick Dalzell",
       role: "Advisor",
       bio: "Former Senior Vice President at Amazon, instrumental in building Amazon's technology and operations platform.",
       image: "/team/rick.png",
     },
     {
-      id: 3,
+      id: 4,
       name: "Peter Neupert",
       role: "Advisor",
       bio: "The former Corporate Vice President of Microsoft currently chairs or advises companies like Fortrea, LabCorp, and Adaptive Biotechnologies",
       image: "/team/peter.png",
     },
     {
-      id: 4,
+      id: 5,
       name: "Jason Child",
       role: "Advisor",
       bio: "Executive Vice President and Chief Financial Officer of Arm, known for scaling high‑growth tech companies and leading major finance and IPO efforts at firms like Amazon, Groupon, Splunk, and Opendoor",
       image: "/team/jason.png",
     },
     {
-      id: 5,
+      id: 6,
       name: "William Kim",
       role: "Advisor",
       bio: "CEO of Shinsegae International, noted executive with major roles in consumer retail and brand management.",
@@ -594,7 +607,7 @@ const AboutUsSection = () => {
         </motion.h2>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.id}
@@ -690,8 +703,8 @@ const BrandsStatsSection = () => {
             with agentic intelligence that moves with purpose, delivering the
             performance retailers have always expected but rarely received.
           </p>
-          <button className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition-all">
-            Get Started
+          <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition-all cursor-pointer">
+            Join Waitlist
           </button>
         </motion.div>
 
@@ -789,7 +802,7 @@ const FeaturesSection = () => {
         <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
           Build and orchestrate intelligent agents that work together with
           purpose—automating decisions and actions across the retail stack.
-          Backed by deep AI insights and powerful analytics, every move is
+          Backed by deep Agentic AI insights and powerful analytics, every move is
           informed, precise, and built to deliver dependable outcomes.
         </p>
       </motion.div>
@@ -1098,7 +1111,7 @@ const FeaturesSection = () => {
           viewport={{ once: true }}
         >
           <h3 className="text-2xl font-semibold text-white mb-3">
-            Analytics & AI Insights That See the Whole Picture
+            Analytics & Agentic AI Insights That See the Whole Picture
           </h3>
           <p className="text-gray-400 mb-6 leading-relaxed">
             Unlock deep visibility across every retail action with analytics
@@ -1228,10 +1241,10 @@ const HowItWorksSection = () => {
               2
             </div>
             <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Deploy</span> your agents
+              <span className="text-violet-400">Deploy</span> the agentic AI framework
             </h3>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Choose the right agents based on your goals and
+              Choose the right agents based on your goals using our forward deployed engineers
             </p>
           </div>
 
@@ -1272,7 +1285,7 @@ const HowItWorksSection = () => {
               <span className="text-violet-400">Boost</span> your sales
             </h3>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              While AI handles the execution, you focus on strategy
+              While Agentic AI handles the execution, you focus on strategy
             </p>
           </div>
 
@@ -1640,93 +1653,6 @@ const HowItWorksSection = () => {
 //   );
 // };
 
-const GetStartedSection = () => {
-  return (
-    <div className="w-full py-20 md:py-32 px-8 md:px-16 relative overflow-hidden bg-[#0a0a16]">
-      <div className="max-w-2xl mx-auto relative z-10">
-        {/* Heading */}
-        <motion.h2
-          className="text-4xl md:text-5xl lg:text-6xl text-center text-white mb-6 leading-tight"
-          style={{
-            fontFamily: "Cormorant Garamond, Georgia, serif",
-            fontWeight: 600,
-          }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Get started
-        </motion.h2>
-
-        {/* Description */}
-        <motion.p
-          className="text-lg md:text-xl text-gray-400 text-center mb-12 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Ready to transform your retail conversion metrics? Book a demo to see
-          how ResultFlow can drive measurable results for your business.
-        </motion.p>
-
-        {/* Form Container */}
-        <motion.div
-          className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 backdrop-blur-sm"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <form className="space-y-6">
-            {/* Work Email Field */}
-            <div>
-              <label
-                htmlFor="work-email"
-                className="block text-white text-sm font-medium mb-2"
-              >
-                Work Email
-              </label>
-              <input
-                type="email"
-                id="work-email"
-                name="work-email"
-                placeholder="you@company.com"
-                className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 transition-all"
-              />
-            </div>
-
-            {/* Company Name Field */}
-            <div>
-              <label
-                htmlFor="company-name"
-                className="block text-white text-sm font-medium mb-2"
-              >
-                Company Name
-              </label>
-              <input
-                type="text"
-                id="company-name"
-                name="company-name"
-                placeholder="Your Company"
-                className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 transition-all"
-              />
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.02]"
-            >
-              Get Started
-            </button>
-          </form>
-        </motion.div>
-      </div>
-    </div>
-  );
-};
 
 const Footer = () => {
   return (
