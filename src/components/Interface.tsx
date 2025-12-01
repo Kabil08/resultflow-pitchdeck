@@ -9,14 +9,26 @@ import {
   FaMobileAlt,
 } from "react-icons/fa";
 
-// Tally popup helper function
+// Tally popup helper function with fallback
 const openTallyWaitlist = () => {
-  if (typeof window !== 'undefined' && (window as any).Tally) {
-    (window as any).Tally.openPopup('q45oyO', {
-      layout: 'modal',
-      width: 600,
-      autoClose: 3000,
-    });
+  if (typeof window !== 'undefined') {
+    // Check if Tally is loaded
+    if ((window as any).Tally) {
+      try {
+        (window as any).Tally.openPopup('q45oyO', {
+          layout: 'modal',
+          width: 600,
+          autoClose: 3000,
+        });
+      } catch (error) {
+        console.error('Tally popup error:', error);
+        // Fallback to direct URL
+        window.open('https://tally.so/r/q45oyO', '_blank');
+      }
+    } else {
+      // If Tally script not loaded, open in new tab
+      window.open('https://tally.so/r/q45oyO', '_blank');
+    }
   }
 };
 
