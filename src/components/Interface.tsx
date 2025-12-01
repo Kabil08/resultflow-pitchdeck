@@ -364,7 +364,7 @@ const HeroSection = () => {
             <div className="absolute inset-0 bg-purple-500 rounded-full animate-pulse"></div>
             <div className="absolute inset-0 bg-purple-400 rounded-full opacity-75 animate-ping"></div>
           </div>
-          <span className="text-white text-sm font-medium pl-2">
+          <span className="text-white text-base md:text-lg font-medium pl-2">
             Vertical Agentic AI for Retail
           </span>
         </motion.div>
@@ -385,12 +385,14 @@ const HeroSection = () => {
 
         {/* Description */}
         <motion.p
-          className="text-lg md:text-xl text-gray-400 text-center max-w-2xl mb-10 leading-relaxed"
+          className="text-xl md:text-2xl lg:text-3xl text-gray-400 text-center max-w-2xl mb-10 leading-relaxed"
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9 }}
         >
-          Grow your revenue by greater than or equal to 100%, Cloud agnostic, best fit LLM, domain aware, enterprise aware
+          Grow your revenue upto 50%
+          <br />
+          Cloud agnostic, domain aware, enterprise aware, best fit LLM platform
         </motion.p>
 
         {/* CTA Buttons */}
@@ -614,8 +616,7 @@ const AboutUsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          Backed by <span className="text-purple-500">Amazon S Team</span>{" "}
-          Leaders
+          Backed by <span className="text-purple-500">Industry Veterans</span>
         </motion.h2>
 
         {/* Team Grid */}
@@ -706,15 +707,9 @@ const BrandsStatsSection = () => {
               fontWeight: 600,
             }}
           >
-            Reliability Engine for Retail{" "}
-            <span className="text-purple-400">Designed for Certainty</span>
+            Guaranteed outcome for retail
           </h2>
-          <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-            A native retail platform built to ensure every action drives
-            measurable, reliable results—no guesswork, no excuses. Engineered
-            with agentic intelligence that moves with purpose, delivering the
-            performance retailers have always expected but rarely received.
-          </p>
+
           <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition-all cursor-pointer">
             Join Waitlist
           </button>
@@ -743,7 +738,7 @@ const BrandsStatsSection = () => {
                 fontWeight: 300,
               }}
             >
-              2x
+              50%
             </p>
           </div>
 
@@ -1294,7 +1289,7 @@ const HowItWorksSection = () => {
               3
             </div>
             <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Boost</span> your sales
+              <span className="text-violet-400">Boost</span> your sales upto 50%
             </h3>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
               While Agentic AI handles the execution, you focus on strategy
