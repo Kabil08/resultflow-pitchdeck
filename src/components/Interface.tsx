@@ -353,21 +353,7 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-8 md:px-16 max-w-screen-2xl mx-auto pt-20">
-        {/* Badge */}
-        <motion.div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <div className="relative w-2 h-2">
-            <div className="absolute inset-0 bg-purple-500 rounded-full animate-pulse"></div>
-            <div className="absolute inset-0 bg-purple-400 rounded-full opacity-75 animate-ping"></div>
-          </div>
-          <span className="text-white text-base md:text-lg font-medium pl-2">
-            Vertical Agentic AI for Retail
-          </span>
-        </motion.div>
+
 
         {/* Headline */}
         <motion.h1
@@ -380,7 +366,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          Agentic AI DTC Platform
+          Vertical Agentic AI Platform for DTC
         </motion.h1>
 
         {/* Description */}
@@ -390,7 +376,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9 }}
         >
-          Grow your revenue upto 50%
+          Guaranteed outcomes, Grow your revenue upto 50%
           <br />
           Cloud agnostic, domain aware, enterprise aware, best fit LLM platform
         </motion.p>
@@ -738,7 +724,7 @@ const BrandsStatsSection = () => {
                 fontWeight: 300,
               }}
             >
-              50%
+              <span className="text-2xl md:text-3xl lg:text-4xl">upto</span> 50%
             </p>
           </div>
 
@@ -757,7 +743,7 @@ const BrandsStatsSection = () => {
                 fontWeight: 300,
               }}
             >
-              2x
+              <span className="text-2xl md:text-3xl lg:text-4xl">upto</span> 2x
             </p>
           </div>
 
@@ -776,7 +762,7 @@ const BrandsStatsSection = () => {
                 fontWeight: 300,
               }}
             >
-              25%
+              <span className="text-2xl md:text-3xl lg:text-4xl">upto</span> 25%
             </p>
           </div>
         </motion.div>
@@ -1182,7 +1168,7 @@ const HowItWorksSection = () => {
       </motion.div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
         {/* Card 1 - Connect */}
         <motion.div
           className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
@@ -1267,7 +1253,7 @@ const HowItWorksSection = () => {
           ></div>
         </motion.div>
 
-        {/* Card 3 - Create */}
+        {/* Card 3 - Boost */}
         <motion.div
           className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
           style={{
@@ -1301,6 +1287,47 @@ const HowItWorksSection = () => {
             className="mt-auto relative h-64 w-full"
             style={{
               backgroundImage: "url(/images/boast.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+        </motion.div>
+
+        {/* Card 4 - Accelerate */}
+        <motion.div
+          className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, black 60%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 60%, transparent 100%)",
+          }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          {/* Blurred gradient top-right */}
+          <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
+
+          <div className="relative z-10">
+            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
+              4
+            </div>
+            <h3 className="text-2xl text-white mb-3">
+              <span className="text-violet-400">Effectively accelerate</span> your Agentic AI journey with our platform
+            </h3>
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              Create your own workflows
+            </p>
+          </div>
+
+          {/* Visual - Accelerate */}
+          <div
+            className="mt-auto relative h-64 w-full"
+            style={{
+              backgroundImage: "url(/images/accelerate.png)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
