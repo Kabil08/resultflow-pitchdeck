@@ -376,7 +376,9 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.9 }}
         >
-          Guaranteed outcomes, Grow your revenue upto 50%
+          Guaranteed outcomes
+          <br />
+          Grow your revenue upto 50%
           <br />
           Cloud agnostic, domain aware, enterprise aware, best fit LLM platform
         </motion.p>
@@ -427,7 +429,7 @@ const ChosenBySection = () => {
       logo: <FaRunning className="text-white opacity-95" size={32} />,
     },
     {
-      name: "Global Consumer Electronics",
+      name: "Consumer Electronics",
       logo: <FaMobileAlt className="text-white opacity-95" size={32} />,
     },
   ];
@@ -824,7 +826,7 @@ const FeaturesSection = () => {
             style={{ aspectRatio: "10/10" }}
           >
             <div className="h-full flex flex-col gap-3">
-              {/* Step 1 - Cart Abandoned Agent */}
+              {/* Step 1 - Product Recommendation Agent */}
               <div
                 className="flex items-center gap-3 animate-slide-in"
                 style={{ animationDelay: "0s" }}
@@ -832,40 +834,20 @@ const FeaturesSection = () => {
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                 </div>
-                <div className="flex-1 bg-purple-900/30 border border-purple-500/30 rounded-lg px-4 py-2.5">
+                <div className="flex-1 bg-rose-900/30 border border-rose-500/30 rounded-lg px-4 py-2.5">
                   <div className="text-sm text-gray-300">
-                    <span className="text-purple-400 font-medium">
-                      Cart Abandoned Agent
+                    <span className="text-rose-400 font-medium">
+                      Product Recommendation Agent
                     </span>{" "}
                     is created
                   </div>
                 </div>
               </div>
 
-              {/* Step 2 - Inventory Agent */}
-
-              {/* Step 3 - Customer Support Agent */}
+              {/* Step 2 - Price Optimization Agent */}
               <div
                 className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.4s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-violet-900/30 border border-violet-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-violet-400 font-medium">
-                      Customer Support Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 4 - Price Optimization Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.6s" }}
+                style={{ animationDelay: "0.2s" }}
               >
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -880,44 +862,10 @@ const FeaturesSection = () => {
                 </div>
               </div>
 
-              {/* Step 5 - Order Fulfillment Agent */}
+              {/* Step 3 - Upsell Management Agent */}
               <div
                 className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.8s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-cyan-900/30 border border-cyan-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-cyan-400 font-medium">
-                      Order Fulfillment Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 6 - Product Recommendation Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "1s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-rose-900/30 border border-rose-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-rose-400 font-medium">
-                      Product Recommendation Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.2s" }}
+                style={{ animationDelay: "0.4s" }}
               >
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -931,10 +879,47 @@ const FeaturesSection = () => {
                   </div>
                 </div>
               </div>
-              {/* Step 7 - Payment Processing Agent */}
+
+              {/* Step 4 - Customer Support Agent */}
               <div
                 className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "1.2s" }}
+                style={{ animationDelay: "0.6s" }}
+              >
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                </div>
+                <div className="flex-1 bg-violet-900/30 border border-violet-500/30 rounded-lg px-4 py-2.5">
+                  <div className="text-sm text-gray-300">
+                    <span className="text-violet-400 font-medium">
+                      Customer Support Agent
+                    </span>{" "}
+                    is created
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 5 - Cart Abandoned Agent */}
+              <div
+                className="flex items-center gap-3 animate-slide-in"
+                style={{ animationDelay: "0.8s" }}
+              >
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                </div>
+                <div className="flex-1 bg-purple-900/30 border border-purple-500/30 rounded-lg px-4 py-2.5">
+                  <div className="text-sm text-gray-300">
+                    <span className="text-purple-400 font-medium">
+                      Cart Abandoned Agent
+                    </span>{" "}
+                    is created
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 6 - Payment Processing Agent */}
+              <div
+                className="flex items-center gap-3 animate-slide-in"
+                style={{ animationDelay: "1s" }}
               >
                 <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full"></div>
@@ -943,6 +928,24 @@ const FeaturesSection = () => {
                   <div className="text-sm text-gray-300">
                     <span className="text-amber-400 font-medium">
                       Payment Processing Agent
+                    </span>{" "}
+                    is created
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 7 - Order Fulfillment Agent */}
+              <div
+                className="flex items-center gap-3 animate-slide-in"
+                style={{ animationDelay: "1.2s" }}
+              >
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                </div>
+                <div className="flex-1 bg-cyan-900/30 border border-cyan-500/30 rounded-lg px-4 py-2.5">
+                  <div className="text-sm text-gray-300">
+                    <span className="text-cyan-400 font-medium">
+                      Order Fulfillment Agent
                     </span>{" "}
                     is created
                   </div>
@@ -985,7 +988,7 @@ const FeaturesSection = () => {
                 </div>
               </div>
 
-              {/* Step 10 - Loading State */}
+              {/* Step 10 - Additional Agents */}
               <div
                 className="flex items-center gap-3 animate-slide-in"
                 style={{ animationDelay: "1.8s" }}
@@ -1169,7 +1172,7 @@ const HowItWorksSection = () => {
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-        {/* Card 1 - Connect */}
+        {/* Card 1 - Effectively Accelerate */}
         <motion.div
           className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
           style={{
@@ -1189,6 +1192,47 @@ const HowItWorksSection = () => {
           <div className="relative z-10">
             <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
               1
+            </div>
+            <h3 className="text-2xl text-white mb-3">
+              <span className="text-violet-400">Effectively accelerate</span> your Agentic AI journey with our platform
+            </h3>
+            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+              Create your own workflows
+            </p>
+          </div>
+
+          {/* Visual - Accelerate */}
+          <div
+            className="mt-auto relative h-64 w-full"
+            style={{
+              backgroundImage: "url(/images/accelerate.png)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+        </motion.div>
+
+        {/* Card 2 - Connect */}
+        <motion.div
+          className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, black 60%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 60%, transparent 100%)",
+          }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          {/* Blurred gradient top-right */}
+          <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
+
+          <div className="relative z-10">
+            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
+              2
             </div>
             <h3 className="text-2xl text-white mb-3">
               <span className="text-violet-400">Connect</span> your stack
@@ -1212,48 +1256,7 @@ const HowItWorksSection = () => {
           ></div>
         </motion.div>
 
-        {/* Card 2 - Deploy */}
-        <motion.div
-          className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {/* Blurred gradient top-right */}
-          <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
-
-          <div className="relative z-10">
-            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
-              2
-            </div>
-            <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Deploy</span> the agentic AI framework
-            </h3>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Choose the right agents based on your goals using our forward deployed engineers
-            </p>
-          </div>
-
-          {/* Visual - Rocket */}
-          <div
-            className="mt-auto relative h-64 w-full"
-            style={{
-              backgroundImage: "url(/images/deploy.png)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          ></div>
-        </motion.div>
-
-        {/* Card 3 - Boost */}
+        {/* Card 3 - Deploy */}
         <motion.div
           className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
           style={{
@@ -1275,18 +1278,18 @@ const HowItWorksSection = () => {
               3
             </div>
             <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Boost</span> your sales upto 50%
+              <span className="text-violet-400">Deploy</span> the agentic AI framework
             </h3>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              While Agentic AI handles the execution, you focus on strategy
+              Choose the right agents based on your goals using our forward deployed engineers
             </p>
           </div>
 
-          {/* Visual - Dashboard */}
+          {/* Visual - Rocket */}
           <div
             className="mt-auto relative h-64 w-full"
             style={{
-              backgroundImage: "url(/images/boast.png)",
+              backgroundImage: "url(/images/deploy.png)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -1294,7 +1297,7 @@ const HowItWorksSection = () => {
           ></div>
         </motion.div>
 
-        {/* Card 4 - Accelerate */}
+        {/* Card 4 - Boost */}
         <motion.div
           className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
           style={{
@@ -1316,18 +1319,18 @@ const HowItWorksSection = () => {
               4
             </div>
             <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Effectively accelerate</span> your Agentic AI journey with our platform
+              <span className="text-violet-400">Boost</span> your sales upto 50%
             </h3>
             <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Create your own workflows
+              While Agentic AI handles the execution, you focus on strategy
             </p>
           </div>
 
-          {/* Visual - Accelerate */}
+          {/* Visual - Dashboard */}
           <div
             className="mt-auto relative h-64 w-full"
             style={{
-              backgroundImage: "url(/images/accelerate.png)",
+              backgroundImage: "url(/images/boast.png)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
