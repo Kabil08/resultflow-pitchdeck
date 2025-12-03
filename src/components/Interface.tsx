@@ -546,7 +546,7 @@ const AboutUsSection = () => {
     {
       id: 2,
       name: "Muru Subramani",
-      role: "CTO & CO-FOUNDER",
+      role: "CTO & Co-Founder",
       bio: "Former CTO at GlobalScholar, Microsoft Research scientist with 8+ patents in Machine Learning, built Valve's game distribution platform.",
       image: "/team/muru.png",
     },
