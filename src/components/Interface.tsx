@@ -305,12 +305,12 @@ const HeroSection = () => {
           {/* Logo Icon */}
           <img
             src="/Gemini_Generated_Image_gmuivpgmuivpgmui-removebg-preview.png"
-            alt="Result Flow Logo"
+            alt="ResultFlow.ai Logo"
             className="w-8 h-8 object-contain"
             style={{ filter: "invert(1)" }}
           />
           <span className="text-white text-xl font-semibold tracking-tight">
-            Result Flow
+            ResultFlow.ai
           </span>
         </div>
 
@@ -380,7 +380,11 @@ const HeroSection = () => {
           <br />
           Grow your revenue upto 50%
           <br />
-          Cloud agnostic, domain aware, enterprise aware, best fit LLM platform
+          Domain aware, Enterprise aware
+          <br />
+          Cloud agnostic, best fit LLM platform
+          <br />
+          Agentic AI platform to accelerate AI modernization
         </motion.p>
 
         {/* CTA Buttons */}
@@ -1700,7 +1704,7 @@ const Footer = () => {
     <div className="w-full py-8 px-8 md:px-16 bg-[#0a0a16] border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <p className="text-center text-gray-400 text-sm">
-          © 2025 Result Flow AI. All rights reserved.
+          © 2025 ResultFlow.ai. All rights reserved.
         </p>
       </div>
     </div>
