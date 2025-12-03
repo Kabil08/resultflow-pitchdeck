@@ -380,7 +380,7 @@ const HeroSection = () => {
           <br />
           Grow your revenue upto 50%
           <br />
-          <span className="whitespace-nowrap">Cloud agnostic, domain aware, enterprise aware, best fit LLM platform</span>
+          Cloud agnostic, domain aware, enterprise aware, best fit LLM platform
         </motion.p>
 
         {/* CTA Buttons */}
