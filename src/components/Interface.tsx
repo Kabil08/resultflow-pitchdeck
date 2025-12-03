@@ -775,7 +775,8 @@ const BrandsStatsSection = () => {
 
 const FeaturesSection = () => {
   return (
-    <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-between bg-[#0a0a16]">
+    <div className="w-full bg-[#0a0a16]">
+    <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-between">
       {/* Section Header */}
       <motion.div
         className="text-center mb-16"
@@ -1145,12 +1146,14 @@ const FeaturesSection = () => {
         </motion.div>
       </div>
     </div>
+    </div>
   );
 };
 
 const HowItWorksSection = () => {
   return (
-    <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-center bg-[#0a0a16]">
+    <div className="w-full bg-[#0a0a16]">
+    <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-center">
       {/* Section Header */}
       <motion.div
         className="mb-16"
@@ -1338,6 +1341,7 @@ const HowItWorksSection = () => {
           ></div>
         </motion.div>
       </div>
+    </div>
     </div>
   );
 };
