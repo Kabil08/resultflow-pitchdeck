@@ -380,7 +380,7 @@ const HeroSection = () => {
           <br />
           Grow your revenue upto 50%
           <br />
-          Cloud agnostic, domain aware, enterprise aware, best fit LLM platform
+          <span className="whitespace-nowrap">Cloud agnostic, domain aware, enterprise aware, best fit LLM platform</span>
         </motion.p>
 
         {/* CTA Buttons */}
@@ -393,7 +393,7 @@ const HeroSection = () => {
           <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 py-3 px-8 rounded-full font-semibold text-lg transition-all min-w-[160px] cursor-pointer">
             Join Waitlist
           </button>
-          <button className="bg-white/5 hover:bg-white/10 text-white py-3 px-8 rounded-full font-semibold text-lg transition-all border border-white/10 min-w-[160px]">
+          <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white/5 hover:bg-white/10 text-white py-3 px-8 rounded-full font-semibold text-lg transition-all border border-white/10 min-w-[160px] cursor-pointer">
             View More
           </button>
         </motion.div>
@@ -1152,7 +1152,7 @@ const FeaturesSection = () => {
 
 const HowItWorksSection = () => {
   return (
-    <div className="w-full bg-[#0a0a16]">
+    <div id="how-it-works" className="w-full bg-[#0a0a16]">
     <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-center">
       {/* Section Header */}
       <motion.div
