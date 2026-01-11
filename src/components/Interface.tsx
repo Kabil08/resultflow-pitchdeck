@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import {
   FaVideo,
   FaLeaf,
@@ -11,23 +12,23 @@ import {
 
 // Tally popup helper function with fallback
 const openTallyWaitlist = () => {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     // Check if Tally is loaded
     if ((window as any).Tally) {
       try {
-        (window as any).Tally.openPopup('q45oyO', {
-          layout: 'modal',
+        (window as any).Tally.openPopup("q45oyO", {
+          layout: "modal",
           width: 600,
           autoClose: 3000,
         });
       } catch (error) {
-        console.error('Tally popup error:', error);
+        console.error("Tally popup error:", error);
         // Fallback to direct URL
-        window.open('https://tally.so/r/q45oyO', '_blank');
+        window.open("https://tally.so/r/q45oyO", "_blank");
       }
     } else {
       // If Tally script not loaded, open in new tab
-      window.open('https://tally.so/r/q45oyO', '_blank');
+      window.open("https://tally.so/r/q45oyO", "_blank");
     }
   }
 };
@@ -45,6 +46,61 @@ export const Interface = () => {
       <Footer />
       {/* <LanternEngineSection /> */}
     </div>
+  );
+};
+
+const TextSlider = () => {
+  const texts = [
+    "Guaranteed outcomes",
+    "Grow your revenue upto 50%",
+    "Domain aware, Enterprise aware",
+    "Cloud agnostic, best fit LLM platform",
+    "Agentic AI platform to accelerate AI modernization",
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 1800); // Change text every 1.8 seconds (faster)
+
+    return () => clearInterval(interval);
+  }, [texts.length]);
+
+  return (
+    <motion.div
+      className="text-xl md:text-2xl lg:text-3xl text-gray-400 text-center max-w-2xl mb-10 leading-relaxed min-h-[80px] md:min-h-[100px] lg:min-h-[120px] flex items-center justify-center overflow-hidden relative"
+      initial={{ opacity: 0, x: -100 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={currentIndex}
+          className="w-full"
+          initial={{
+            opacity: 0,
+            y: 50,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          exit={{
+            opacity: 0,
+            y: -50,
+          }}
+          transition={{
+            duration: 0.2,
+            ease: [0.4, 0, 0.2, 1], // Smooth, fast easing
+          }}
+        >
+          {texts[currentIndex]}
+        </motion.p>
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
@@ -345,7 +401,10 @@ const HeroSection = () => {
             </svg>
             <span className="text-sm font-medium">EN</span>
           </div>
-          <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm transition-all cursor-pointer">
+          <button
+            onClick={openTallyWaitlist}
+            className="bg-white text-black hover:bg-gray-100 px-5 py-2 rounded-full font-medium text-sm transition-all cursor-pointer"
+          >
             Join waitlist
           </button>
         </div>
@@ -353,8 +412,6 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-8 md:px-16 max-w-screen-2xl mx-auto pt-20">
-
-
         {/* Headline */}
         <motion.h1
           className="text-5xl md:text-7xl lg:text-8xl text-center text-white mb-8 leading-[1.1] tracking-tight"
@@ -366,26 +423,13 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
-          Vertical Agentic AI Platform for DTC
+          Vertical Agentic AI Platform
+          <br />
+          <span className="text-3xl md:text-5xl lg:text-6xl">for</span> DTC
         </motion.h1>
 
-        {/* Description */}
-        <motion.p
-          className="text-xl md:text-2xl lg:text-3xl text-gray-400 text-center max-w-2xl mb-10 leading-relaxed"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.9 }}
-        >
-          Guaranteed outcomes
-          <br />
-          Grow your revenue upto 50%
-          <br />
-          Domain aware, Enterprise aware
-          <br />
-          Cloud agnostic, best fit LLM platform
-          <br />
-          Agentic AI platform to accelerate AI modernization
-        </motion.p>
+        {/* Description - Animated Slider */}
+        <TextSlider />
 
         {/* CTA Buttons */}
         <motion.div
@@ -394,10 +438,20 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2 }}
         >
-          <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 py-3 px-8 rounded-full font-semibold text-lg transition-all min-w-[160px] cursor-pointer">
+          <button
+            onClick={openTallyWaitlist}
+            className="bg-white text-black hover:bg-gray-100 py-3 px-8 rounded-full font-semibold text-lg transition-all min-w-[160px] cursor-pointer"
+          >
             Join Waitlist
           </button>
-          <button onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white/5 hover:bg-white/10 text-white py-3 px-8 rounded-full font-semibold text-lg transition-all border border-white/10 min-w-[160px] cursor-pointer">
+          <button
+            onClick={() =>
+              document
+                .getElementById("how-it-works")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="bg-white/5 hover:bg-white/10 text-white py-3 px-8 rounded-full font-semibold text-lg transition-all border border-white/10 min-w-[160px] cursor-pointer"
+          >
             View More
           </button>
         </motion.div>
@@ -511,7 +565,10 @@ const ChosenBySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <button onClick={openTallyWaitlist} className="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white font-semibold rounded-full transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 cursor-pointer">
+          <button
+            onClick={openTallyWaitlist}
+            className="px-8 py-4 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-500 hover:to-violet-500 text-white font-semibold rounded-full transition-all duration-300 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 cursor-pointer"
+          >
             Join Waitlist
           </button>
         </motion.div>
@@ -535,14 +592,7 @@ const ChosenBySection = () => {
 };
 
 const AboutUsSection = () => {
-  const teamMembers = [
-    {
-      id: 1,
-      name: "Kal Raman",
-      role: "Founder & CEO",
-      bio: "Amazon S-Team, Samsung CDO, Groupon COO, multiple exits.",
-      image: "/team/kal.png",
-    },
+  const founders = [
     {
       id: 2,
       name: "Muru Subramani",
@@ -551,11 +601,21 @@ const AboutUsSection = () => {
       image: "/team/muru.png",
     },
     {
-      id: 3,
-      name: "Rick Dalzell",
-      role: "Advisor",
-      bio: "Former Senior Vice President at Amazon, instrumental in building Amazon's technology and operations platform.",
-      image: "/team/rick.png",
+      id: 1,
+      name: "Kal Raman",
+      role: "Founder & CEO",
+      bio: "Amazon S-Team, Samsung CDO, Groupon COO, multiple exits.",
+      image: "/team/kal.png",
+    },
+  ];
+
+  const boardOfDirectors = [
+    {
+      id: 1,
+      name: "Kal Raman",
+      role: "Founder & CEO",
+      bio: "Amazon S-Team, Samsung CDO, Groupon COO, multiple exits.",
+      image: "/team/kal.png",
     },
     {
       id: 4,
@@ -563,6 +623,23 @@ const AboutUsSection = () => {
       role: "Advisor",
       bio: "The former Corporate Vice President of Microsoft currently chairs or advises companies like Fortrea, LabCorp, and Adaptive Biotechnologies",
       image: "/team/peter.png",
+    },
+    {
+      id: 7,
+      name: "Girish Mathrubootham ",
+      role: "Board",
+      bio: "Founder of Freshworks and global SaaS leader",
+      image: "/team/girish.png",
+    },
+  ];
+
+  const advisors = [
+    {
+      id: 3,
+      name: "Rick Dalzell",
+      role: "Advisor",
+      bio: "Former Senior Vice President at Amazon, instrumental in building Amazon's technology and operations platform.",
+      image: "/team/rick.png",
     },
     {
       id: 5,
@@ -579,6 +656,90 @@ const AboutUsSection = () => {
       image: "/team/kim.png",
     },
   ];
+
+  const renderTeamSection = (
+    members: typeof founders,
+    sectionTitle: string,
+    startIndex: number = 0
+  ) => (
+    <div className="mb-16 md:mb-20">
+      <motion.div
+        className="mb-8 md:mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <h3
+          className="text-2xl md:text-3xl lg:text-4xl text-center text-white mb-4 font-semibold"
+          style={{
+            fontFamily: "Cormorant Garamond, Georgia, serif",
+          }}
+        >
+          {sectionTitle}
+        </h3>
+        {/* Decorative flowing lines */}
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="h-px w-8 bg-gradient-to-r from-transparent to-violet-500/50"></div>
+          <div className="h-px w-16 bg-gradient-to-r from-violet-500/50 via-purple-500/50 to-violet-500/50"></div>
+          <div className="h-px w-8 bg-gradient-to-l from-transparent to-violet-500/50"></div>
+        </div>
+        <div className="flex items-center justify-center gap-1">
+          <div className="h-px w-4 bg-gradient-to-r from-transparent to-purple-500/30"></div>
+          <div className="h-px w-12 bg-gradient-to-r from-purple-500/30 via-violet-500/40 to-purple-500/30"></div>
+          <div className="h-px w-4 bg-gradient-to-l from-transparent to-purple-500/30"></div>
+        </div>
+      </motion.div>
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 ${
+          members.length === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"
+        } gap-4 md:gap-6 ${
+          members.length === 2 ? "max-w-3xl" : "max-w-6xl"
+        } mx-auto`}
+      >
+        {members.map((member, index) => (
+          <motion.div
+            key={member.id}
+            className="flex flex-col items-center group"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+          >
+            {/* Image Container - Alternating Rounded Hexagonal Frame */}
+            <div
+              className="relative w-[240px] h-[240px] mx-auto mb-6 overflow-hidden bg-white"
+              style={{
+                clipPath:
+                  (startIndex + index) % 2 === 0
+                    ? "url(#roundedHexagonLeft)"
+                    : "url(#roundedHexagonRight)",
+              }}
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-in-out"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+            </div>
+
+            {/* Name */}
+            <h4 className="text-xl md:text-2xl text-white font-bold mb-3 text-center">
+              {member.name}
+            </h4>
+
+            {/* Bio */}
+            <p className="text-xs md:text-sm text-gray-400 text-center leading-relaxed px-2 max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+              {member.bio}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <div className="w-full py-20 md:py-32 px-8 md:px-16 relative overflow-hidden bg-[#0a0a16]">
@@ -599,7 +760,7 @@ const AboutUsSection = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Heading */}
         <motion.h2
-          className="text-3xl md:text-4xl lg:text-5xl text-center text-white mb-4 font-semibold tracking-tight pb-24"
+          className="text-3xl md:text-4xl lg:text-5xl text-center text-white mb-16 md:mb-20 font-semibold tracking-tight"
           style={{
             fontFamily: "Cormorant Garamond, Georgia, serif",
           }}
@@ -611,55 +772,22 @@ const AboutUsSection = () => {
           Backed by <span className="text-purple-500">Industry Veterans</span>
         </motion.h2>
 
-        {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {teamMembers.map((member, index) => (
-            <motion.div
-              key={member.id}
-              className="flex flex-col items-center group"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              {/* Image Container - Alternating Rounded Hexagonal Frame */}
-              <div
-                className="relative w-[240px] h-[240px] mx-auto mb-6 overflow-hidden bg-white"
-                style={{
-                  clipPath:
-                    index % 2 === 0
-                      ? "url(#roundedHexagonLeft)"
-                      : "url(#roundedHexagonRight)",
-                }}
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-in-out"
-                  onError={(e) => {
-                    // Fallback if image doesn't load
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-              </div>
+        {/* Founders Section */}
+        {renderTeamSection(founders, "Founders", 0)}
 
-              {/* Name */}
-              <h3 className="text-xl md:text-2xl text-white font-bold mb-1 text-center">
-                {member.name}
-              </h3>
+        {/* Board of Directors Section */}
+        {renderTeamSection(
+          boardOfDirectors,
+          "Board of Directors",
+          founders.length
+        )}
 
-              {/* Role */}
-              <p className="text-sm md:text-base text-purple-400 font-medium text-center mb-3">
-                {member.role}
-              </p>
-
-              {/* Bio */}
-              <p className="text-xs md:text-sm text-gray-400 text-center leading-relaxed px-2 max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                {member.bio}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+        {/* Advisors Section */}
+        {renderTeamSection(
+          advisors,
+          "Advisors",
+          founders.length + boardOfDirectors.length
+        )}
       </div>
     </div>
   );
@@ -667,111 +795,119 @@ const AboutUsSection = () => {
 
 const BrandsStatsSection = () => {
   return (
-    <div className="w-full px-8 md:px-16 py-16 mx-auto flex flex-col bg-[#0a0a16]">
-      {/* Stats Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-        {/* Left Side - Heading and Description */}
-        <motion.div
-          className="lg:col-span-3"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
+    <div className="w-full bg-[#0a0a16]">
+      <div className="w-full px-8 md:px-16 py-20 md:py-32 max-w-screen-2xl mx-auto flex flex-col">
+        {/* Stats Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+          {/* Left Side - Heading and Description */}
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            className="lg:col-span-3"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
-            <div className="relative w-2 h-2">
-              <div className="absolute inset-0 bg-purple-500 rounded-full animate-pulse"></div>
-              <div className="absolute inset-0 bg-purple-400 rounded-full opacity-75 animate-ping"></div>
-            </div>
-            <span className="text-white text-sm font-medium pl-2">
-              Guaranteed outcomes
-            </span>
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <div className="relative w-2 h-2">
+                <div className="absolute inset-0 bg-purple-500 rounded-full animate-pulse"></div>
+                <div className="absolute inset-0 bg-purple-400 rounded-full opacity-75 animate-ping"></div>
+              </div>
+              <span className="text-white text-sm font-medium pl-2">
+                Guaranteed outcomes
+              </span>
+            </motion.div>
+            <h2
+              className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight"
+              style={{
+                fontFamily: "Cormorant Garamond, Georgia, serif",
+                fontWeight: 600,
+              }}
+            >
+              Guaranteed outcome for retail
+            </h2>
+
+            <button
+              onClick={openTallyWaitlist}
+              className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition-all cursor-pointer"
+            >
+              Join Waitlist
+            </button>
           </motion.div>
-          <h2
-            className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight"
-            style={{
-              fontFamily: "Cormorant Garamond, Georgia, serif",
-              fontWeight: 600,
-            }}
+
+          {/* Right Side - Stats */}
+          <motion.div
+            className="space-y-12 lg:col-span-2"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
           >
-            Guaranteed outcome for retail
-          </h2>
-
-          <button onClick={openTallyWaitlist} className="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition-all cursor-pointer">
-            Join Waitlist
-          </button>
-        </motion.div>
-
-        {/* Right Side - Stats */}
-        <motion.div
-          className="space-y-12 lg:col-span-2"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          {/* Stat 1 */}
-          <div className="relative flex flex-col">
-            <div className="flex items-center gap-2 mb-2">
-              <p className="text-gray-400 text-base md:text-lg whitespace-nowrap">
-                conversion rate.
+            {/* Stat 1 */}
+            <div className="relative flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <p className="text-gray-400 text-base md:text-lg whitespace-nowrap">
+                  conversion rate.
+                </p>
+                <div className="flex-1 h-px bg-gradient-to-r from-white/40 via-white/20 to-transparent"></div>
+              </div>
+              <p
+                className="text-5xl md:text-6xl lg:text-7xl font-medium text-white"
+                style={{
+                  fontFamily: "system-ui, -apple-system, sans-serif",
+                  fontWeight: 300,
+                }}
+              >
+                <span className="text-2xl md:text-3xl lg:text-4xl">upto</span>{" "}
+                50%
               </p>
-              <div className="flex-1 h-px bg-gradient-to-r from-white/40 via-white/20 to-transparent"></div>
             </div>
-            <p
-              className="text-5xl md:text-6xl lg:text-7xl font-medium text-white"
-              style={{
-                fontFamily: "system-ui, -apple-system, sans-serif",
-                fontWeight: 300,
-              }}
-            >
-              <span className="text-2xl md:text-3xl lg:text-4xl">upto</span> 50%
-            </p>
-          </div>
 
-          {/* Stat 2 */}
-          <div className="relative flex flex-col">
-            <div className="flex items-center gap-2 mb-2">
-              <p className="text-gray-400 text-base md:text-lg whitespace-nowrap">
-                cart recovery.
+            {/* Stat 2 */}
+            <div className="relative flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <p className="text-gray-400 text-base md:text-lg whitespace-nowrap">
+                  cart recovery.
+                </p>
+                <div className="flex-1 h-px bg-gradient-to-r from-violet-400/40 via-violet-400/20 to-transparent"></div>
+              </div>
+              <p
+                className="text-5xl md:text-6xl lg:text-7xl font-medium text-violet-400"
+                style={{
+                  fontFamily: "system-ui, -apple-system, sans-serif",
+                  fontWeight: 300,
+                }}
+              >
+                <span className="text-2xl md:text-3xl lg:text-4xl">upto</span>{" "}
+                2x
               </p>
-              <div className="flex-1 h-px bg-gradient-to-r from-violet-400/40 via-violet-400/20 to-transparent"></div>
             </div>
-            <p
-              className="text-5xl md:text-6xl lg:text-7xl font-medium text-violet-400"
-              style={{
-                fontFamily: "system-ui, -apple-system, sans-serif",
-                fontWeight: 300,
-              }}
-            >
-              <span className="text-2xl md:text-3xl lg:text-4xl">upto</span> 2x
-            </p>
-          </div>
 
-          {/* Stat 3 */}
-          <div className="relative flex flex-col">
-            <div className="flex items-center gap-2 mb-2">
-              <p className="text-gray-400 text-base md:text-lg whitespace-nowrap">
-                fewer abandoned carts.
+            {/* Stat 3 */}
+            <div className="relative flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <p className="text-gray-400 text-base md:text-lg whitespace-nowrap">
+                  fewer abandoned carts.
+                </p>
+                <div className="flex-1 h-px bg-gradient-to-r from-white/40 via-white/20 to-transparent"></div>
+              </div>
+              <p
+                className="text-5xl md:text-6xl lg:text-7xl font-medium text-white"
+                style={{
+                  fontFamily: "system-ui, -apple-system, sans-serif",
+                  fontWeight: 300,
+                }}
+              >
+                <span className="text-2xl md:text-3xl lg:text-4xl">upto</span>{" "}
+                25%
               </p>
-              <div className="flex-1 h-px bg-gradient-to-r from-white/40 via-white/20 to-transparent"></div>
             </div>
-            <p
-              className="text-5xl md:text-6xl lg:text-7xl font-medium text-white"
-              style={{
-                fontFamily: "system-ui, -apple-system, sans-serif",
-                fontWeight: 300,
-              }}
-            >
-              <span className="text-2xl md:text-3xl lg:text-4xl">upto</span> 25%
-            </p>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -780,257 +916,257 @@ const BrandsStatsSection = () => {
 const FeaturesSection = () => {
   return (
     <div className="w-full bg-[#0a0a16]">
-    <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-between">
-      {/* Section Header */}
-      <motion.div
-        className="text-center mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <h2
-          className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight max-w-4xl mx-auto"
-          style={{
-            fontFamily: "Cormorant Garamond, Georgia, serif",
-            fontWeight: 600,
-          }}
-        >
-          Smart Features Engineered for{" "}
-          <span className="text-gray-400">Agentic Retail</span>
-        </h2>
-        <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
-          Build and orchestrate intelligent agents that work together with
-          purpose—automating decisions and actions across the retail stack.
-          Backed by deep Agentic AI insights and powerful analytics, every move is
-          informed, precise, and built to deliver dependable outcomes.
-        </p>
-      </motion.div>
-
-      {/* Features Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Feature 1 - Autonomous Task Execution */}
+      <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-between">
+        {/* Section Header */}
         <motion.div
-          className="bg-white/5 border border-white/10 p-8 rounded-2xl lg:row-span-2"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl font-semibold text-white mb-3">
-            Smart Agent Creation Built for Real Retail Work
-          </h3>
-          <p className="text-gray-400 mb-6 leading-relaxed">
-            Create agents that understand goals, adapt fast, and act with
-            purpose. Designed to handle real operations and deliver dependable
-            results—without constant oversight.
-          </p>
-          {/* Visual representation - Agent Orchestration Workflow */}
-          <div
-            className="relative bg-black/30 rounded-xl p-6 overflow-hidden"
-            style={{ aspectRatio: "10/10" }}
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight max-w-4xl mx-auto"
+            style={{
+              fontFamily: "Cormorant Garamond, Georgia, serif",
+              fontWeight: 600,
+            }}
           >
-            <div className="h-full flex flex-col gap-3">
-              {/* Step 1 - Product Recommendation Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-rose-900/30 border border-rose-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-rose-400 font-medium">
-                      Product Recommendation Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
+            Smart Features Engineered for{" "}
+            <span className="text-gray-400">Agentic Retail</span>
+          </h2>
+          <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+            Build and orchestrate intelligent agents that work together with
+            purpose—automating decisions and actions across the retail stack.
+            Backed by deep Agentic AI insights and powerful analytics, every
+            move is informed, precise, and built to deliver dependable outcomes.
+          </p>
+        </motion.div>
 
-              {/* Step 2 - Price Optimization Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.2s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-emerald-900/30 border border-emerald-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-emerald-400 font-medium">
-                      Price Optimization Agent
-                    </span>{" "}
-                    is created
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Feature 1 - Autonomous Task Execution */}
+          <motion.div
+            className="bg-white/5 border border-white/10 p-8 rounded-2xl lg:row-span-2"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-semibold text-white mb-3">
+              Smart Agent Creation Built for Real Retail Work
+            </h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Create agents that understand goals, adapt fast, and act with
+              purpose. Designed to handle real operations and deliver dependable
+              results—without constant oversight.
+            </p>
+            {/* Visual representation - Agent Orchestration Workflow */}
+            <div
+              className="relative bg-black/30 rounded-xl p-6 overflow-hidden"
+              style={{ aspectRatio: "10/10" }}
+            >
+              <div className="h-full flex flex-col gap-3">
+                {/* Step 1 - Product Recommendation Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "0s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                   </div>
-                </div>
-              </div>
-
-              {/* Step 3 - Upsell Management Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.4s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-blue-900/30 border border-blue-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-blue-400 font-medium">
-                      Upsell Management Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 4 - Customer Support Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.6s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-violet-900/30 border border-violet-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-violet-400 font-medium">
-                      Customer Support Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 5 - Cart Abandoned Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "0.8s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-purple-900/30 border border-purple-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-purple-400 font-medium">
-                      Cart Abandoned Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 6 - Payment Processing Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "1s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-amber-900/30 border border-amber-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-amber-400 font-medium">
-                      Payment Processing Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 7 - Order Fulfillment Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "1.2s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-cyan-900/30 border border-cyan-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-cyan-400 font-medium">
-                      Order Fulfillment Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 8 - Shipping & Logistics Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "1.4s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-teal-900/30 border border-teal-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-teal-400 font-medium">
-                      Shipping & Logistics Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 9 - Customer Retention Agent */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "1.6s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                </div>
-                <div className="flex-1 bg-pink-900/30 border border-pink-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300">
-                    <span className="text-pink-400 font-medium">
-                      Customer Retention Agent
-                    </span>{" "}
-                    is created
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 10 - Additional Agents */}
-              <div
-                className="flex items-center gap-3 animate-slide-in"
-                style={{ animationDelay: "1.8s" }}
-              >
-                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                </div>
-                <div className="flex-1 bg-indigo-900/30 border border-indigo-500/30 rounded-lg px-4 py-2.5">
-                  <div className="text-sm text-gray-300 flex items-center gap-2">
-                    <span className="text-indigo-400 font-medium">
-                      Additional Agents
-                    </span>
-                    <span className="text-gray-500">initializing</span>
-                    <div className="flex gap-1 ml-auto">
-                      <div
-                        className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0s" }}
-                      ></div>
-                      <div
-                        className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></div>
-                      <div
-                        className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.4s" }}
-                      ></div>
+                  <div className="flex-1 bg-rose-900/30 border border-rose-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-rose-400 font-medium">
+                        Product Recommendation Agent
+                      </span>{" "}
+                      is created
                     </div>
                   </div>
                 </div>
+
+                {/* Step 2 - Price Optimization Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "0.2s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-emerald-900/30 border border-emerald-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-emerald-400 font-medium">
+                        Price Optimization Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 3 - Upsell Management Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "0.4s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-blue-900/30 border border-blue-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-blue-400 font-medium">
+                        Upsell Management Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 4 - Customer Support Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "0.6s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-violet-900/30 border border-violet-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-violet-400 font-medium">
+                        Customer Support Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 5 - Cart Abandoned Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "0.8s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-purple-900/30 border border-purple-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-purple-400 font-medium">
+                        Cart Abandoned Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 6 - Payment Processing Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "1s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-amber-900/30 border border-amber-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-amber-400 font-medium">
+                        Payment Processing Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 7 - Order Fulfillment Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "1.2s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-cyan-900/30 border border-cyan-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-cyan-400 font-medium">
+                        Order Fulfillment Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 8 - Shipping & Logistics Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "1.4s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-teal-900/30 border border-teal-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-teal-400 font-medium">
+                        Shipping & Logistics Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 9 - Customer Retention Agent */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "1.6s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="flex-1 bg-pink-900/30 border border-pink-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300">
+                      <span className="text-pink-400 font-medium">
+                        Customer Retention Agent
+                      </span>{" "}
+                      is created
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 10 - Additional Agents */}
+                <div
+                  className="flex items-center gap-3 animate-slide-in"
+                  style={{ animationDelay: "1.8s" }}
+                >
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  </div>
+                  <div className="flex-1 bg-indigo-900/30 border border-indigo-500/30 rounded-lg px-4 py-2.5">
+                    <div className="text-sm text-gray-300 flex items-center gap-2">
+                      <span className="text-indigo-400 font-medium">
+                        Additional Agents
+                      </span>
+                      <span className="text-gray-500">initializing</span>
+                      <div className="flex gap-1 ml-auto">
+                        <div
+                          className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"
+                          style={{ animationDelay: "0s" }}
+                        ></div>
+                        <div
+                          className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"
+                          style={{ animationDelay: "0.2s" }}
+                        ></div>
+                        <div
+                          className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"
+                          style={{ animationDelay: "0.4s" }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Connecting lines between steps */}
+                <div className="absolute left-[1.5rem] top-8 bottom-8 w-0.5 bg-gradient-to-b from-green-500/30 via-green-500/20 to-transparent -z-10"></div>
               </div>
 
-              {/* Connecting lines between steps */}
-              <div className="absolute left-[1.5rem] top-8 bottom-8 w-0.5 bg-gradient-to-b from-green-500/30 via-green-500/20 to-transparent -z-10"></div>
-            </div>
-
-            {/* Animation keyframes */}
-            <style>{`
+              {/* Animation keyframes */}
+              <style>{`
               @keyframes slide-in {
                 0% {
                   opacity: 0;
@@ -1046,110 +1182,110 @@ const FeaturesSection = () => {
                 opacity: 0;
               }
             `}</style>
-          </div>
-        </motion.div>
-
-        {/* Feature 2 - Multi-Agent Collaboration */}
-        <motion.div
-          className="bg-white/5 border border-white/10 p-8 rounded-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-semibold text-white mb-3">
-            Multi-Agent Orchestration That Moves as One
-          </h3>
-          <p className="text-gray-400 mb-6 leading-relaxed">
-            Sync multiple agents to operate with discipline and precision.
-            Everything stays aligned, keeping retail workflows smooth and
-            outcomes predictable.
-          </p>
-          {/* Visual representation - network of avatars */}
-          <div className="relative h-48 bg-black/30 rounded-xl p-6 flex flex-col justify-center gap-8 overflow-hidden">
-            {/* Connecting lines */}
-            <div className="absolute inset-0 pointer-events-none">
-              {/* Horizontal line top */}
-              <div className="absolute top-[35%] left-[25%] right-[25%] h-px bg-purple-500/30"></div>
-              {/* Horizontal line bottom */}
-              <div className="absolute top-[65%] left-[15%] right-[15%] h-px bg-purple-500/30"></div>
-              {/* Vertical connection */}
-              <div className="absolute top-[35%] bottom-[35%] left-1/2 w-px bg-purple-500/30"></div>
             </div>
+          </motion.div>
 
-            {/* Top Row */}
-            <div className="flex justify-center gap-12 relative z-10">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/80 to-indigo-600/80 border-2 border-purple-400/30 flex items-center justify-center shadow-lg shadow-purple-500/20"
-                >
-                  <div className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm"></div>
-                </div>
-              ))}
-            </div>
+          {/* Feature 2 - Multi-Agent Collaboration */}
+          <motion.div
+            className="bg-white/5 border border-white/10 p-8 rounded-2xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-semibold text-white mb-3">
+              Multi-Agent Orchestration That Moves as One
+            </h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Sync multiple agents to operate with discipline and precision.
+              Everything stays aligned, keeping retail workflows smooth and
+              outcomes predictable.
+            </p>
+            {/* Visual representation - network of avatars */}
+            <div className="relative h-48 bg-black/30 rounded-xl p-6 flex flex-col justify-center gap-8 overflow-hidden">
+              {/* Connecting lines */}
+              <div className="absolute inset-0 pointer-events-none">
+                {/* Horizontal line top */}
+                <div className="absolute top-[35%] left-[25%] right-[25%] h-px bg-purple-500/30"></div>
+                {/* Horizontal line bottom */}
+                <div className="absolute top-[65%] left-[15%] right-[15%] h-px bg-purple-500/30"></div>
+                {/* Vertical connection */}
+                <div className="absolute top-[35%] bottom-[35%] left-1/2 w-px bg-purple-500/30"></div>
+              </div>
 
-            {/* Bottom Row */}
-            <div className="flex justify-center gap-8 relative z-10">
-              {[0, 1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600/80 to-purple-500/80 border-2 border-purple-400/30 flex items-center justify-center shadow-lg shadow-purple-500/20"
-                >
-                  <div className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Feature 3 - Analytics & Insights */}
-        <motion.div
-          className="bg-white/5 border border-white/10 p-8 rounded-2xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-semibold text-white mb-3">
-            Analytics & Agentic AI Insights That See the Whole Picture
-          </h3>
-          <p className="text-gray-400 mb-6 leading-relaxed">
-            Unlock deep visibility across every retail action with analytics
-            that cut through noise and surface what truly matters. AI-driven
-            insights reveal patterns, predict outcomes, and guide decisions with
-            the clarity retailers have relied on for generations.
-          </p>
-          {/* Visual representation - bar chart */}
-          <div className="relative h-48 bg-black/30 rounded-xl p-6 border border-white/10">
-            {/* Bars container */}
-            <div className="relative h-full flex items-end justify-center gap-6 pt-8">
-              {[30, 45, 78, 75, 50, 65, 40, 55, 90].map((height, i) => {
-                const isHighlight = i === 2 || i === 3;
-                return (
+              {/* Top Row */}
+              <div className="flex justify-center gap-12 relative z-10">
+                {[0, 1, 2].map((i) => (
                   <div
                     key={i}
-                    className={`rounded-t-lg ${
-                      isHighlight
-                        ? "bg-gradient-to-t from-purple-600/60 to-purple-500/40 border border-purple-400/30"
-                        : "bg-gradient-to-t from-purple-900/40 to-purple-800/30 border border-purple-500/20"
-                    }`}
-                    style={{
-                      height: `${height}%`,
-                      width: "32px",
-                      minHeight: "20px",
-                      boxShadow: isHighlight
-                        ? "0 0 12px rgba(139, 92, 246, 0.3)"
-                        : "0 0 6px rgba(139, 92, 246, 0.15)",
-                    }}
-                  ></div>
-                );
-              })}
+                    className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/80 to-indigo-600/80 border-2 border-purple-400/30 flex items-center justify-center shadow-lg shadow-purple-500/20"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm"></div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom Row */}
+              <div className="flex justify-center gap-8 relative z-10">
+                {[0, 1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600/80 to-purple-500/80 border-2 border-purple-400/30 flex items-center justify-center shadow-lg shadow-purple-500/20"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm"></div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* Feature 3 - Analytics & Insights */}
+          <motion.div
+            className="bg-white/5 border border-white/10 p-8 rounded-2xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-semibold text-white mb-3">
+              Analytics & Agentic AI Insights That See the Whole Picture
+            </h3>
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Unlock deep visibility across every retail action with analytics
+              that cut through noise and surface what truly matters. AI-driven
+              insights reveal patterns, predict outcomes, and guide decisions
+              with the clarity retailers have relied on for generations.
+            </p>
+            {/* Visual representation - bar chart */}
+            <div className="relative h-48 bg-black/30 rounded-xl p-6 border border-white/10">
+              {/* Bars container */}
+              <div className="relative h-full flex items-end justify-center gap-6 pt-8">
+                {[30, 45, 78, 75, 50, 65, 40, 55, 90].map((height, i) => {
+                  const isHighlight = i === 2 || i === 3;
+                  return (
+                    <div
+                      key={i}
+                      className={`rounded-t-lg ${
+                        isHighlight
+                          ? "bg-gradient-to-t from-purple-600/60 to-purple-500/40 border border-purple-400/30"
+                          : "bg-gradient-to-t from-purple-900/40 to-purple-800/30 border border-purple-500/20"
+                      }`}
+                      style={{
+                        height: `${height}%`,
+                        width: "32px",
+                        minHeight: "20px",
+                        boxShadow: isHighlight
+                          ? "0 0 12px rgba(139, 92, 246, 0.3)"
+                          : "0 0 6px rgba(139, 92, 246, 0.15)",
+                      }}
+                    ></div>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
@@ -1157,195 +1293,203 @@ const FeaturesSection = () => {
 const HowItWorksSection = () => {
   return (
     <div id="how-it-works" className="w-full bg-[#0a0a16]">
-    <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-center">
-      {/* Section Header */}
-      <motion.div
-        className="mb-16"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <h2
-          className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight"
-          style={{
-            fontFamily: "Cormorant Garamond, Georgia, serif",
-            fontWeight: 600,
-          }}
-        >
-          <span className="text-violet-400">How</span> It Works
-        </h2>
-      </motion.div>
-
-      {/* Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-        {/* Card 1 - Effectively Accelerate */}
+      <div className="min-h-screen w-full px-8 md:px-16 py-16 max-w-screen-2xl mx-auto flex flex-col justify-center">
+        {/* Section Header */}
         <motion.div
-          className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-          }}
+          className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          {/* Blurred gradient top-right */}
-          <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
-
-          <div className="relative z-10">
-            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
-              1
-            </div>
-            <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Effectively accelerate</span> your Agentic AI journey with our platform
-            </h3>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Create your own workflows
-            </p>
-          </div>
-
-          {/* Visual - Accelerate */}
-          <div
-            className="mt-auto relative h-64 w-full"
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight"
             style={{
-              backgroundImage: "url(/images/accelerate.png)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+              fontFamily: "Cormorant Garamond, Georgia, serif",
+              fontWeight: 600,
             }}
-          ></div>
+          >
+            <span className="text-violet-400">How</span> It Works
+          </h2>
         </motion.div>
 
-        {/* Card 2 - Connect */}
-        <motion.div
-          className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          {/* Blurred gradient top-right */}
-          <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
-
-          <div className="relative z-10">
-            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
-              2
-            </div>
-            <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Connect</span> your stack
-            </h3>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Lantern plugs into your CRM, MAP, and data tools
-            </p>
-          </div>
-
-          {/* Visual - Funnel/Connection */}
-          <div
-            className="mt-auto relative w-full overflow-visible"
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          {/* Card 1 - Effectively Accelerate */}
+          <motion.div
+            className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
             style={{
-              height: "450px",
-              minHeight: "450px",
-              backgroundImage: "url(/images/connect.png)",
-              backgroundSize: "contain",
-              backgroundPosition: "center top",
-              backgroundRepeat: "no-repeat",
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
             }}
-          ></div>
-        </motion.div>
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            {/* Blurred gradient top-right */}
+            <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
 
-        {/* Card 3 - Deploy */}
-        <motion.div
-          className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          {/* Blurred gradient top-right */}
-          <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
-
-          <div className="relative z-10">
-            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
-              3
+            <div className="relative z-10">
+              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
+                1
+              </div>
+              <h3 className="text-2xl text-white mb-3">
+                <span className="text-violet-400">Effectively accelerate</span>{" "}
+                your Agentic AI journey with our platform
+              </h3>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                Create your own workflows
+              </p>
             </div>
-            <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Deploy</span> the agentic AI framework
-            </h3>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              Choose the right agents based on your goals using our forward deployed engineers
-            </p>
-          </div>
 
-          {/* Visual - Rocket */}
-          <div
-            className="mt-auto relative h-64 w-full"
+            {/* Visual - Accelerate */}
+            <div
+              className="mt-auto relative h-64 w-full"
+              style={{
+                backgroundImage: "url(/images/accelerate.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                filter: "brightness(1.1) contrast(1.15) saturate(1.2)",
+              }}
+            ></div>
+          </motion.div>
+
+          {/* Card 2 - Connect */}
+          <motion.div
+            className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
             style={{
-              backgroundImage: "url(/images/deploy.png)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
             }}
-          ></div>
-        </motion.div>
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {/* Blurred gradient top-right */}
+            <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
 
-        {/* Card 4 - Boost */}
-        <motion.div
-          className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
-          style={{
-            maskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 60%, transparent 100%)",
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          {/* Blurred gradient top-right */}
-          <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
-
-          <div className="relative z-10">
-            <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
-              4
+            <div className="relative z-10">
+              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
+                2
+              </div>
+              <h3 className="text-2xl text-white mb-3">
+                <span className="text-violet-400">Connect</span> your stack
+              </h3>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                Lantern plugs into your CRM, MAP, and data tools
+              </p>
             </div>
-            <h3 className="text-2xl text-white mb-3">
-              <span className="text-violet-400">Boost</span> your sales upto 50%
-            </h3>
-            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-              While Agentic AI handles the execution, you focus on strategy
-            </p>
-          </div>
 
-          {/* Visual - Dashboard */}
-          <div
-            className="mt-auto relative h-64 w-full"
+            {/* Visual - Funnel/Connection */}
+            <div
+              className="mt-auto relative w-full overflow-visible"
+              style={{
+                height: "450px",
+                minHeight: "450px",
+                backgroundImage: "url(/images/connect.png)",
+                backgroundSize: "contain",
+                backgroundPosition: "center top",
+                backgroundRepeat: "no-repeat",
+                filter: "brightness(1.1) contrast(1.15) saturate(1.2)",
+              }}
+            ></div>
+          </motion.div>
+
+          {/* Card 3 - Deploy */}
+          <motion.div
+            className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
             style={{
-              backgroundImage: "url(/images/boast.png)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
             }}
-          ></div>
-        </motion.div>
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            {/* Blurred gradient top-right */}
+            <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
+
+            <div className="relative z-10">
+              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
+                3
+              </div>
+              <h3 className="text-2xl text-white mb-3">
+                <span className="text-violet-400">Deploy</span> the agentic AI
+                framework
+              </h3>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                Choose the right agents based on your goals using our forward
+                deployed engineers
+              </p>
+            </div>
+
+            {/* Visual - Rocket */}
+            <div
+              className="mt-auto relative h-64 w-full"
+              style={{
+                backgroundImage: "url(/images/deploy.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                filter: "brightness(1.1) contrast(1.15) saturate(1.2)",
+              }}
+            ></div>
+          </motion.div>
+
+          {/* Card 4 - Boost */}
+          <motion.div
+            className="bg-gradient-to-b from-[#1a1a2e] to-[#0f0f1e] border-t-2 border-x-2 border-violet-500/30 p-8 rounded-t-3xl relative overflow-visible group h-[600px] flex flex-col"
+            style={{
+              maskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, black 60%, transparent 100%)",
+            }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            {/* Blurred gradient top-right */}
+            <div className="absolute top-0 right-0 w-54 h-54 bg-violet-500/30 rounded-full blur-3xl"></div>
+
+            <div className="relative z-10">
+              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 mb-6">
+                4
+              </div>
+              <h3 className="text-2xl text-white mb-3">
+                <span className="text-violet-400">Boost</span> your sales upto
+                50%
+              </h3>
+              <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                While Agentic AI handles the execution, you focus on strategy
+              </p>
+            </div>
+
+            {/* Visual - Dashboard */}
+            <div
+              className="mt-auto relative h-64 w-full rounded-xl overflow-hidden"
+              style={{
+                backgroundImage: "url(/images/boast.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                filter: "brightness(1.1) contrast(1.15) saturate(1.2)",
+              }}
+            ></div>
+          </motion.div>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
@@ -1698,13 +1842,12 @@ const HowItWorksSection = () => {
 //   );
 // };
 
-
 const Footer = () => {
   return (
     <div className="w-full py-8 px-8 md:px-16 bg-[#0a0a16] border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <p className="text-center text-gray-400 text-sm">
-          © 2025 ResultFlow.ai. All rights reserved.
+          © 2026 ResultFlow.ai. All rights reserved.
         </p>
       </div>
     </div>
