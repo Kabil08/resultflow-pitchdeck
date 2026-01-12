@@ -591,6 +591,11 @@ const ChosenBySection = () => {
   );
 };
 
+// Module-level variable to track currently expanded member (shared across all cards)
+// Uses composite key: "sectionTitle-memberId" to handle same person in multiple sections
+let currentExpandedKey: string | null = null;
+const expandedKeyListeners = new Set<(key: string | null) => void>();
+
 const AboutUsSection = () => {
   const founders = [
     {
@@ -662,17 +667,46 @@ const AboutUsSection = () => {
     member,
     index,
     startIndex,
+    sectionTitle,
   }: {
     member: (typeof founders)[0];
     index: number;
     startIndex: number;
+    sectionTitle: string;
   }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
+    // Create unique key for this card: sectionTitle-memberId
+    const cardKey = `${sectionTitle}-${member.id}`;
+    const [expandedKey, setExpandedKey] = useState<string | null>(null);
     const ref = useRef(null);
 
-    const toggleExpanded = () => {
-      setIsExpanded(!isExpanded);
+    // Subscribe to expanded key changes
+    useEffect(() => {
+      const listener = (key: string | null) => {
+        setExpandedKey(key);
+      };
+      expandedKeyListeners.add(listener);
+      
+      // Set initial state
+      setExpandedKey(currentExpandedKey === cardKey ? cardKey : null);
+
+      return () => {
+        expandedKeyListeners.delete(listener);
+      };
+    }, [cardKey]);
+
+    const toggleExpanded = (key: string) => {
+      if (currentExpandedKey === key) {
+        // If clicking the same card, close it
+        currentExpandedKey = null;
+      } else {
+        // Otherwise, open this card and close any other
+        currentExpandedKey = key;
+      }
+      // Notify all listeners
+      expandedKeyListeners.forEach((listener) => listener(currentExpandedKey));
     };
+
+    const isExpanded = expandedKey === cardKey;
 
     return (
       <motion.div
@@ -696,7 +730,7 @@ const AboutUsSection = () => {
                 ? "url(#roundedHexagonLeft)"
                 : "url(#roundedHexagonRight)",
           }}
-          onClick={toggleExpanded}
+          onClick={() => toggleExpanded(cardKey)}
         >
           <img
             src={member.image}
@@ -781,6 +815,7 @@ const AboutUsSection = () => {
             member={member}
             index={index}
             startIndex={startIndex}
+            sectionTitle={sectionTitle}
           />
         ))}
       </div>
