@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from "react";
 import {
   FaVideo,
   FaLeaf,
@@ -592,7 +592,12 @@ const ChosenBySection = () => {
 };
 
 const AboutUsSection = () => {
-  const founders = [
+  // Shared state for expanded member across all sections
+  // Using string format: "sectionType-memberId" to ensure uniqueness
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  // Memoize arrays to prevent unnecessary re-renders
+  const founders = useMemo(() => [
     {
       id: 2,
       name: "Muru Subramani",
@@ -607,9 +612,9 @@ const AboutUsSection = () => {
       bio: "Amazon S-Team, Samsung CDO, Groupon COO, multiple exits.",
       image: "/team/kal.png",
     },
-  ];
+  ], []);
 
-  const boardOfDirectors = [
+  const boardOfDirectors = useMemo(() => [
     {
       id: 1,
       name: "Kal Raman",
@@ -631,9 +636,9 @@ const AboutUsSection = () => {
       bio: "Founder of Freshworks and global SaaS leader",
       image: "/team/girish.png",
     },
-  ];
+  ], []);
 
-  const advisors = [
+  const advisors = useMemo(() => [
     {
       id: 3,
       name: "Rick Dalzell",
@@ -655,24 +660,28 @@ const AboutUsSection = () => {
       bio: "CEO of Shinsegae International, noted executive with major roles in consumer retail and brand management.",
       image: "/team/kim.png",
     },
-  ];
+  ], []);
+
+  const handleToggle = useCallback((uniqueId: string) => {
+    setExpandedId((prev) => (prev === uniqueId ? null : uniqueId));
+  }, []);
 
   // Team Member Card Component with click/tap reveal for mobile
-  const TeamMemberCard = ({
+  // Memoized to prevent unnecessary re-renders
+  const TeamMemberCard = memo(({
     member,
     index,
     startIndex,
+    isExpanded,
+    onToggle,
   }: {
     member: (typeof founders)[0];
     index: number;
     startIndex: number;
+    isExpanded: boolean;
+    onToggle: () => void;
   }) => {
-    const [isExpanded, setIsExpanded] = useState(false);
     const ref = useRef(null);
-
-    const toggleExpanded = () => {
-      setIsExpanded(!isExpanded);
-    };
 
     return (
       <motion.div
@@ -682,6 +691,7 @@ const AboutUsSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: index * 0.1 }}
+        layout={false}
       >
         {/* Image Container - Alternating Rounded Hexagonal Frame - Clickable on mobile */}
         <div
@@ -692,12 +702,16 @@ const AboutUsSection = () => {
                 ? "url(#roundedHexagonLeft)"
                 : "url(#roundedHexagonRight)",
           }}
-          onClick={toggleExpanded}
+          onClick={onToggle}
         >
           <img
             src={member.image}
             alt={member.name}
-            className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-in-out"
+            className={`w-full h-full object-cover object-center transition-all duration-500 ease-in-out ${
+              isExpanded
+                ? "grayscale-0 scale-110 md:grayscale md:scale-100 md:group-hover:grayscale-0 md:group-hover:scale-110"
+                : "grayscale group-hover:grayscale-0 group-hover:scale-110"
+            }`}
             onError={(e) => {
               e.currentTarget.style.display = "none";
             }}
@@ -714,66 +728,93 @@ const AboutUsSection = () => {
         {/* Bio - Shows on hover (desktop) and on click/tap (mobile) */}
         <p
           className={`text-xs md:text-sm text-gray-400 text-center leading-relaxed px-2 overflow-hidden transition-all duration-500 ease-in-out ${
-            isExpanded ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+            isExpanded ? "max-h-40 opacity-100 mb-4 md:mb-0" : "max-h-0 opacity-0 mb-0"
           } md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100`}
         >
           {member.bio}
         </p>
       </motion.div>
     );
-  };
+  });
 
-  const renderTeamSection = (
-    members: typeof founders,
-    sectionTitle: string,
-    startIndex: number = 0
-  ) => (
-    <div className="mb-16 md:mb-20">
-      <motion.div
-        className="mb-8 md:mb-12"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <h3
-          className="text-2xl md:text-3xl lg:text-4xl text-center text-white mb-4 font-semibold"
-          style={{
-            fontFamily: "Cormorant Garamond, Georgia, serif",
-          }}
+  const TeamSection = ({
+    members,
+    sectionTitle,
+    sectionType,
+    startIndex = 0,
+    expandedId,
+    onToggle,
+  }: {
+    members: typeof founders;
+    sectionTitle: string;
+    sectionType: string;
+    startIndex?: number;
+    expandedId: string | null;
+    onToggle: (uniqueId: string) => void;
+  }) => {
+    // Memoize toggle callbacks to prevent unnecessary re-renders
+    const toggleCallbacks = useMemo(() => {
+      const callbacks: Record<string, () => void> = {};
+      members.forEach((member) => {
+        const uniqueId = `${sectionType}-${member.id}`;
+        callbacks[uniqueId] = () => onToggle(uniqueId);
+      });
+      return callbacks;
+    }, [members, sectionType, onToggle]);
+
+    return (
+      <div className="mb-16 md:mb-20">
+        <motion.div
+          className="mb-8 md:mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          {sectionTitle}
-        </h3>
-        {/* Decorative flowing lines */}
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <div className="h-px w-8 bg-gradient-to-r from-transparent to-violet-500/50"></div>
-          <div className="h-px w-16 bg-gradient-to-r from-violet-500/50 via-purple-500/50 to-violet-500/50"></div>
-          <div className="h-px w-8 bg-gradient-to-l from-transparent to-violet-500/50"></div>
+          <h3
+            className="text-2xl md:text-3xl lg:text-4xl text-center text-white mb-4 font-semibold"
+            style={{
+              fontFamily: "Cormorant Garamond, Georgia, serif",
+            }}
+          >
+            {sectionTitle}
+          </h3>
+          {/* Decorative flowing lines */}
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-violet-500/50"></div>
+            <div className="h-px w-16 bg-gradient-to-r from-violet-500/50 via-purple-500/50 to-violet-500/50"></div>
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-violet-500/50"></div>
+          </div>
+          <div className="flex items-center justify-center gap-1">
+            <div className="h-px w-4 bg-gradient-to-r from-transparent to-purple-500/30"></div>
+            <div className="h-px w-12 bg-gradient-to-r from-purple-500/30 via-violet-500/40 to-purple-500/30"></div>
+            <div className="h-px w-4 bg-gradient-to-l from-transparent to-purple-500/30"></div>
+          </div>
+        </motion.div>
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 ${
+            members.length === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"
+          } gap-4 md:gap-6 ${
+            members.length === 2 ? "max-w-3xl" : "max-w-6xl"
+          } mx-auto`}
+        >
+          {members.map((member, index) => {
+            const uniqueId = `${sectionType}-${member.id}`;
+            return (
+              <TeamMemberCard
+                key={member.id}
+                member={member}
+                index={index}
+                startIndex={startIndex}
+                isExpanded={expandedId === uniqueId}
+                onToggle={toggleCallbacks[uniqueId]}
+              />
+            );
+          })}
         </div>
-        <div className="flex items-center justify-center gap-1">
-          <div className="h-px w-4 bg-gradient-to-r from-transparent to-purple-500/30"></div>
-          <div className="h-px w-12 bg-gradient-to-r from-purple-500/30 via-violet-500/40 to-purple-500/30"></div>
-          <div className="h-px w-4 bg-gradient-to-l from-transparent to-purple-500/30"></div>
-        </div>
-      </motion.div>
-      <div
-        className={`grid grid-cols-1 sm:grid-cols-2 ${
-          members.length === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"
-        } gap-4 md:gap-6 ${
-          members.length === 2 ? "max-w-3xl" : "max-w-6xl"
-        } mx-auto`}
-      >
-        {members.map((member, index) => (
-          <TeamMemberCard
-            key={member.id}
-            member={member}
-            index={index}
-            startIndex={startIndex}
-          />
-        ))}
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="w-full py-20 md:py-32 px-8 md:px-16 relative overflow-hidden bg-[#0a0a16]">
@@ -807,21 +848,34 @@ const AboutUsSection = () => {
         </motion.h2>
 
         {/* Founders Section */}
-        {renderTeamSection(founders, "Founders", 0)}
+        <TeamSection
+          members={founders}
+          sectionTitle="Founders"
+          sectionType="founders"
+          startIndex={0}
+          expandedId={expandedId}
+          onToggle={handleToggle}
+        />
 
         {/* Board of Directors Section */}
-        {renderTeamSection(
-          boardOfDirectors,
-          "Board of Directors",
-          founders.length
-        )}
+        <TeamSection
+          members={boardOfDirectors}
+          sectionTitle="Board of Directors"
+          sectionType="board"
+          startIndex={founders.length}
+          expandedId={expandedId}
+          onToggle={handleToggle}
+        />
 
         {/* Advisors Section */}
-        {renderTeamSection(
-          advisors,
-          "Advisors / Investors",
-          founders.length + boardOfDirectors.length
-        )}
+        <TeamSection
+          members={advisors}
+          sectionTitle="Advisors / Investors"
+          sectionType="advisors"
+          startIndex={founders.length + boardOfDirectors.length}
+          expandedId={expandedId}
+          onToggle={handleToggle}
+        />
       </div>
     </div>
   );
