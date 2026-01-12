@@ -121,3 +121,4 @@ useFBX.preload("/animations/Typing.fbx");
 useFBX.preload("/animations/Standing Idle.fbx");
 useFBX.preload("/animations/Falling Idle.fbx");
 
+

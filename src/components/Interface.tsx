@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   FaVideo,
   FaLeaf,
@@ -657,6 +657,72 @@ const AboutUsSection = () => {
     },
   ];
 
+  // Team Member Card Component with click/tap reveal for mobile
+  const TeamMemberCard = ({
+    member,
+    index,
+    startIndex,
+  }: {
+    member: (typeof founders)[0];
+    index: number;
+    startIndex: number;
+  }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const ref = useRef(null);
+
+    const toggleExpanded = () => {
+      setIsExpanded(!isExpanded);
+    };
+
+    return (
+      <motion.div
+        ref={ref}
+        className="flex flex-col items-center group"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
+      >
+        {/* Image Container - Alternating Rounded Hexagonal Frame - Clickable on mobile */}
+        <div
+          className="relative w-[240px] h-[240px] mx-auto mb-6 overflow-hidden bg-white cursor-pointer md:cursor-default"
+          style={{
+            clipPath:
+              (startIndex + index) % 2 === 0
+                ? "url(#roundedHexagonLeft)"
+                : "url(#roundedHexagonRight)",
+          }}
+          onClick={toggleExpanded}
+        >
+          <img
+            src={member.image}
+            alt={member.name}
+            className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-in-out"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
+          {/* Mobile tap indicator - subtle overlay */}
+          <div className="absolute inset-0 bg-black/0 active:bg-black/10 transition-colors md:hidden pointer-events-none"></div>
+        </div>
+
+        {/* Name */}
+        <h4 className="text-xl md:text-2xl text-white font-bold mb-3 text-center">
+          {member.name}
+        </h4>
+
+        {/* Bio - Shows on hover (desktop) and on click/tap (mobile) */}
+        <p
+          className={`text-xs md:text-sm text-gray-400 text-center leading-relaxed px-2 overflow-hidden transition-all duration-500 ease-in-out ${
+            isExpanded ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+          } md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100`}
+        >
+          {member.bio}
+        </p>
+      </motion.div>
+    );
+  };
+
   const renderTeamSection = (
     members: typeof founders,
     sectionTitle: string,
@@ -698,44 +764,12 @@ const AboutUsSection = () => {
         } mx-auto`}
       >
         {members.map((member, index) => (
-          <motion.div
+          <TeamMemberCard
             key={member.id}
-            className="flex flex-col items-center group"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-          >
-            {/* Image Container - Alternating Rounded Hexagonal Frame */}
-            <div
-              className="relative w-[240px] h-[240px] mx-auto mb-6 overflow-hidden bg-white"
-              style={{
-                clipPath:
-                  (startIndex + index) % 2 === 0
-                    ? "url(#roundedHexagonLeft)"
-                    : "url(#roundedHexagonRight)",
-              }}
-            >
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-in-out"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
-              />
-            </div>
-
-            {/* Name */}
-            <h4 className="text-xl md:text-2xl text-white font-bold mb-3 text-center">
-              {member.name}
-            </h4>
-
-            {/* Bio */}
-            <p className="text-xs md:text-sm text-gray-400 text-center leading-relaxed px-2 max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
-              {member.bio}
-            </p>
-          </motion.div>
+            member={member}
+            index={index}
+            startIndex={startIndex}
+          />
         ))}
       </div>
     </div>
@@ -785,7 +819,7 @@ const AboutUsSection = () => {
         {/* Advisors Section */}
         {renderTeamSection(
           advisors,
-          "Advisors",
+          "Advisors / Investors",
           founders.length + boardOfDirectors.length
         )}
       </div>

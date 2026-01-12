@@ -6,3 +6,4 @@ export const Camping = (props) => {
     return <primitive object={scene} {...props} />;
 };
 
+
